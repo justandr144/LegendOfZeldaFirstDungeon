@@ -121,8 +121,53 @@
   <data name="FloorBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FloorBackground.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LinkAttackDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkAttackDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkAttackLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkAttackLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkAttackRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkAttackRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkAttackUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkAttackUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="LinkDown1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkDown1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkDown2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkDown2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkLeft1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkLeft1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkLeft2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkLeft2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkRight1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkRight1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkRight2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkRight2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkUp1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkUp1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkUp2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkUp2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SwordDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SwordDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SwordLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SwordLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SwordRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SwordRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SwordUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SwordUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TitleScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TitleScreen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

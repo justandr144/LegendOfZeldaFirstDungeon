@@ -48,6 +48,7 @@ namespace LegendOfZeldaFirstDungeon
             this.Name = "Room1";
             this.Size = new System.Drawing.Size(967, 700);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Room1_Paint);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Room1_KeyUp);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Room1_PreviewKeyDown);
             this.ResumeLayout(false);
 

@@ -111,5 +111,50 @@
   <ItemGroup>
     <None Include="Resources\LinkDown1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LinkDown2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LinkLeft1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LinkLeft2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LinkUp1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LinkUp2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LinkRight1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LinkRight2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LinkAttackDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LinkAttackLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LinkAttackRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LinkAttackUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwordDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwordLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwordRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwordUp.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
