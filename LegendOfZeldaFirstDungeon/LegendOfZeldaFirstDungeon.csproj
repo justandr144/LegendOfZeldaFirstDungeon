@@ -33,7 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enemy.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,7 +136,7 @@
     <None Include="Resources\LinkRight2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\LinkAttackDown.png" />
+    <None Include="Resources\LinkAttackUp.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\LinkAttackLeft.png" />
@@ -142,19 +145,7 @@
     <None Include="Resources\LinkAttackRight.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\LinkAttackUp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SwordDown.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SwordLeft.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SwordRight.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SwordUp.png" />
+    <None Include="Resources\LinkAttackDown.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

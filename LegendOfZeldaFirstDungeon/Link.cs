@@ -22,7 +22,7 @@ namespace LegendOfZeldaFirstDungeon
             direction = _direction;
         }
 
-        public void Move(string direct)
+        public bool Move(string direct)
         {
             if (direct == "left")
             {
@@ -40,6 +40,13 @@ namespace LegendOfZeldaFirstDungeon
             {
                 y += speed;
             }
+
+            return true;
+        }
+
+        public void Attack()
+        {
+            
         }
     }
 }
