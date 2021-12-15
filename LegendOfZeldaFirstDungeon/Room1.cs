@@ -13,12 +13,19 @@ namespace LegendOfZeldaFirstDungeon
     public partial class Room1 : UserControl
     {
         #region Global Variables
-        Link player = new Link(Form1.playerX, Form1.playerY, Form1.playerSize, Form1.playerSpeed, Form1.playerHealth, Form1.playerImage, Form1.playerDirect);
+        Link player = new Link(Form1.playerX, Form1.playerY, Form1.playerSpeed, Form1.playerHealth, Form1.playerDirect);
 
         bool upArrowDown, downArrowDown, leftArrowDown, rightArrowDown, bDown = false;
         bool movement = false;
         bool attack = false;
         int spriteLoop = 0;
+
+        public static int enemyX = 400;
+        public static int enemyY = 400;
+        public static int enemySpeed = 0;
+        public static int enemyHealth = 3;
+
+        Enemy keese1 = new Enemy(enemyX, enemyY, enemySpeed, enemyHealth);
         #endregion
         public Room1()
         {
@@ -208,6 +215,8 @@ namespace LegendOfZeldaFirstDungeon
                         break;
                 }
             }
+
+            e.Graphics.DrawImage(Properties.Resources.LinkAttackDown, enemyX, enemyY);
         }
     }
 }

@@ -8,17 +8,15 @@ namespace LegendOfZeldaFirstDungeon
 {
     class Link
     {
-        public int x, y, size, speed, health, image;
+        public int x, y, speed, health;
         public string direction;
 
-        public Link(int _x, int _y, int _size, int _speed, int _health, int _image, string _direction)
+        public Link(int _x, int _y, int _speed, int _health, string _direction)
         {
             x = _x;
             y = _y;
-            size = _size;
             speed = _speed;
             health = _health;
-            image = _image;
             direction = _direction;
         }
 
