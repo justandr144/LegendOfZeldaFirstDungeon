@@ -13,25 +13,33 @@ namespace LegendOfZeldaFirstDungeon
     public partial class Room1 : UserControl
     {
         #region Global Variables
-        Link player = new Link(Form1.playerX, Form1.playerY, Form1.playerSpeed, Form1.playerHealth, Form1.playerDirect);
+        Link player = new Link(Form1.playerX, Form1.playerY, Form1.playerSpeed, 56, Form1.playerHealth, Form1.playerDirect);
 
         bool upArrowDown, downArrowDown, leftArrowDown, rightArrowDown, bDown = false;
         bool movement = false;
         bool attack = false;
         int spriteLoop = 0;
+        int playImmune = 0;
+        int attackCool = 0;
 
-        public static int enemyX = 400;
-        public static int enemyY = 400;
-        public static int enemySpeed = 0;
-        public static int enemyHealth = 3;
+        List<Enemy> enemies = new List<Enemy>();
 
-        Enemy keese1 = new Enemy(enemyX, enemyY, enemySpeed, enemyHealth);
+        SolidBrush testBrush = new SolidBrush(Color.Red);
+        Font testFont = new Font("Arial", 16);
         #endregion
         public Room1()
         {
             InitializeComponent();
+            OnStart();
+
             player.x = 400;
             player.y = 300;
+        }
+
+        public void OnStart()
+        {
+            Enemy keese1 = new Enemy(400, 500, 44, 56, 14, 0, 3, 0, "keese");
+            enemies.Add(keese1);
         }
 
         private void Room1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -81,11 +89,28 @@ namespace LegendOfZeldaFirstDungeon
         private void gameLoop_Tick(object sender, EventArgs e)
         {
             movement = false;
-            attack = false;
 
-            if (bDown)
+            if (bDown && attackCool < 1)
             {
+                attackCool = 9;
                 attack = true;
+            }
+
+            if (attack)
+            {
+                foreach (Enemy i in enemies)
+                {
+                    player.Attack(i);
+                }
+            }
+
+            if (attackCool > 0)
+            {
+                attackCool--;
+            }
+            else
+            {
+                attack = false;
             }
 
             if (upArrowDown && attack == false && player.y > 260)
@@ -127,96 +152,133 @@ namespace LegendOfZeldaFirstDungeon
                 spriteLoop = 0;
             }
 
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].counter++;
+                enemies[i].Move(enemies[i]);
+            }
+
+            foreach (Enemy i in enemies)
+            {
+                if (player.Collision(i) && playImmune < 1)
+                {
+                    player.health--;
+                    playImmune = 50;
+                }
+            }
+
+            if (playImmune > 0)
+            {
+                playImmune--;
+            }
+
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].immune > 0)
+                {
+                    enemies[i].immune--;
+                }
+            }
+
             Refresh();
         }
 
         private void Room1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(Properties.Resources.UpDoor, 397, 197);
-            if (attack)
-            {
-                switch (player.direction)
-                {
-                    case "up":
-                        e.Graphics.DrawImage(Properties.Resources.LinkAttackUp, player.x, player.y - 42);
-                        break;
-                    case "down":
-                        e.Graphics.DrawImage(Properties.Resources.LinkAttackDown, player.x, player.y);
-                        break;
-                    case "left":
-                        e.Graphics.DrawImage(Properties.Resources.LinkAttackLeft, player.x - 42, player.y);
-                        break;
-                    case "right":
-                        e.Graphics.DrawImage(Properties.Resources.LinkAttackRight, player.x, player.y);
-                        break;
-                }
-            }
-            else if (movement)
-            {
-                switch (player.direction)
-                {
-                    case "up":
-                        if (spriteLoop >= 0 && spriteLoop <= 9)
-                        {
-                            e.Graphics.DrawImage(Properties.Resources.LinkUp2, player.x, player.y);
-                        }
-                        else if (spriteLoop >= 10 && spriteLoop <= 19)
-                        {
-                            e.Graphics.DrawImage(Properties.Resources.LinkUp1, player.x, player.y);
-                        }
-                        break;
-                    case "down":
-                        if (spriteLoop >= 0 && spriteLoop <= 9)
-                        {
-                            e.Graphics.DrawImage(Properties.Resources.LinkDown2, player.x, player.y);
-                        }
-                        else if (spriteLoop >= 10 && spriteLoop <= 19)
-                        {
-                            e.Graphics.DrawImage(Properties.Resources.LinkDown1, player.x, player.y);
-                        }
-                        break;
-                    case "left":
-                        if (spriteLoop >= 0 && spriteLoop <= 9)
-                        {
-                            e.Graphics.DrawImage(Properties.Resources.LinkLeft2, player.x, player.y);
-                        }
-                        else if (spriteLoop >= 10 && spriteLoop <= 19)
-                        {
-                            e.Graphics.DrawImage(Properties.Resources.LinkLeft1, player.x, player.y);
-                        }
-                        break;
-                    case "right":
-                        if (spriteLoop >= 0 && spriteLoop <= 9)
-                        {
-                            e.Graphics.DrawImage(Properties.Resources.LinkRight1, player.x, player.y);
-                        }
-                        else if (spriteLoop >= 10 && spriteLoop <= 19)
-                        {
-                            e.Graphics.DrawImage(Properties.Resources.LinkRight2, player.x, player.y);
-                        }
-                        break;
-                }
-            }
-            else
-            {
-                switch (player.direction)
-                {
-                    case "up":
-                        e.Graphics.DrawImage(Properties.Resources.LinkUp1, player.x, player.y);
-                        break;
-                    case "down":
-                        e.Graphics.DrawImage(Properties.Resources.LinkDown1, player.x, player.y);
-                        break;
-                    case "left":
-                        e.Graphics.DrawImage(Properties.Resources.LinkLeft1, player.x, player.y);
-                        break;
-                    case "right":
-                        e.Graphics.DrawImage(Properties.Resources.LinkRight2, player.x, player.y);
-                        break;
-                }
-            }
+            e.Graphics.FillRectangle(testBrush, enemies[0].x, enemies[0].y, enemies[0].width, enemies[0].height);
+            //e.Graphics.FillRectangle(testBrush, player.x + 47, player.y + 21, 48, 24);
 
-            e.Graphics.DrawImage(Properties.Resources.LinkAttackDown, enemyX, enemyY);
+            #region Player Movement
+            if (playImmune == 0 || playImmune > 0 && playImmune < 5 || playImmune > 10 && playImmune < 15 || playImmune > 20 && playImmune < 25 || playImmune > 30 && playImmune < 35 || playImmune > 40 && playImmune < 45)
+            {
+                if (attack)
+                {
+                    switch (player.direction)
+                    {
+                        case "up":
+                            e.Graphics.DrawImage(Properties.Resources.LinkAttackUp, player.x, player.y - 42);
+                            break;
+                        case "down":
+                            e.Graphics.DrawImage(Properties.Resources.LinkAttackDown, player.x, player.y);
+                            break;
+                        case "left":
+                            e.Graphics.DrawImage(Properties.Resources.LinkAttackLeft, player.x - 42, player.y);
+                            break;
+                        case "right":
+                            e.Graphics.DrawImage(Properties.Resources.LinkAttackRight, player.x, player.y);
+                            break;
+                    }
+                }
+                else if (movement)
+                {
+                    switch (player.direction)
+                    {
+                        case "up":
+                            if (spriteLoop >= 0 && spriteLoop <= 9)
+                            {
+                                e.Graphics.DrawImage(Properties.Resources.LinkUp2, player.x, player.y);
+                            }
+                            else if (spriteLoop >= 10 && spriteLoop <= 19)
+                            {
+                                e.Graphics.DrawImage(Properties.Resources.LinkUp1, player.x, player.y);
+                            }
+                            break;
+                        case "down":
+                            if (spriteLoop >= 0 && spriteLoop <= 9)
+                            {
+                                e.Graphics.DrawImage(Properties.Resources.LinkDown2, player.x, player.y);
+                            }
+                            else if (spriteLoop >= 10 && spriteLoop <= 19)
+                            {
+                                e.Graphics.DrawImage(Properties.Resources.LinkDown1, player.x, player.y);
+                            }
+                            break;
+                        case "left":
+                            if (spriteLoop >= 0 && spriteLoop <= 9)
+                            {
+                                e.Graphics.DrawImage(Properties.Resources.LinkLeft2, player.x, player.y);
+                            }
+                            else if (spriteLoop >= 10 && spriteLoop <= 19)
+                            {
+                                e.Graphics.DrawImage(Properties.Resources.LinkLeft1, player.x, player.y);
+                            }
+                            break;
+                        case "right":
+                            if (spriteLoop >= 0 && spriteLoop <= 9)
+                            {
+                                e.Graphics.DrawImage(Properties.Resources.LinkRight1, player.x, player.y);
+                            }
+                            else if (spriteLoop >= 10 && spriteLoop <= 19)
+                            {
+                                e.Graphics.DrawImage(Properties.Resources.LinkRight2, player.x, player.y);
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (player.direction)
+                    {
+                        case "up":
+                            e.Graphics.DrawImage(Properties.Resources.LinkUp1, player.x, player.y);
+                            break;
+                        case "down":
+                            e.Graphics.DrawImage(Properties.Resources.LinkDown1, player.x, player.y);
+                            break;
+                        case "left":
+                            e.Graphics.DrawImage(Properties.Resources.LinkLeft1, player.x, player.y);
+                            break;
+                        case "right":
+                            e.Graphics.DrawImage(Properties.Resources.LinkRight2, player.x, player.y);
+                            break;
+                    }
+                }
+            }
+            #endregion
+
+            e.Graphics.DrawString($"{player.health}", testFont, testBrush, 100, 100);
+            e.Graphics.DrawString($"{enemies[0].counter}", testFont, testBrush, 100, 120);
         }
     }
 }

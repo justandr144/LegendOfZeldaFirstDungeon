@@ -14,7 +14,7 @@ namespace LegendOfZeldaFirstDungeon
     {
         public static int playerX = 0;
         public static int playerY = 0;
-        public static int playerSize = 20;
+        public static int playerSize = 56;
         public static int playerSpeed = 7;
         public static int playerHealth = 6;
         public static int playerImage = 0;
