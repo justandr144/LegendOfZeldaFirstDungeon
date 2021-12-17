@@ -114,17 +114,11 @@ namespace LegendOfZeldaFirstDungeon
         public bool Collision(Enemy i)
         {
             Rectangle playerBox = new Rectangle(x, y, size, size);
+            Rectangle enemyBox = new Rectangle(i.x, i.y, i.width, i.height);
 
-            switch (i.name)
+            if (enemyBox.IntersectsWith(playerBox))
             {
-                case ("keese"):
-                    Rectangle enemyBox = new Rectangle(i.x, i.y, i.width, i.height);
-
-                    if (enemyBox.IntersectsWith(playerBox))
-                    {
-                        return true;
-                    }
-                    break;
+                return true;
             }
 
             return false;

@@ -36,24 +36,50 @@ namespace LegendOfZeldaFirstDungeon
                 case "keese":
                     if (i.counter >= 30)
                     {
-                        if (directX == 1 && i.x < 760)
+                        if (directX == 1)
                         {
-                            i.x += i.speed;
+                            if (i.x < 760)
+                            {
+                                i.x += i.speed;
+                            }
+                            else
+                            {
+                                directX = 2;
+                            }
                         }
-                        else if (i.x > 157)
+                        else if (directX == 2)
                         {
-                            directX = 2;
-                            i.x -= i.speed;
+                            if (i.x > 157)
+                            {
+                                i.x -= i.speed;
+                            }
+                            else
+                            {
+                                directX = 1;
+                            }
                         }
 
-                        if (directY == 1 && i.y < 540)
+                        if (directY == 1)
                         {
-                            i.y += i.speed;
+                            if (i.y < 540)
+                            {
+                                i.y += i.speed;
+                            }
+                            else
+                            {
+                                directY = 2;
+                            }
                         }
-                        else if (i.y > 260)
+                        else if (directY == 2)
                         {
-                            directY = 2;
-                            i.y -= i.speed;
+                            if (i.y > 260)
+                            {
+                                i.y -= i.speed;
+                            }
+                            else
+                            {
+                                directY = 1;
+                            }
                         }
 
                         if (i.counter >= 50)

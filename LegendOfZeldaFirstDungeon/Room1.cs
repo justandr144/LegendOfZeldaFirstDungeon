@@ -21,6 +21,7 @@ namespace LegendOfZeldaFirstDungeon
         int spriteLoop = 0;
         int playImmune = 0;
         int attackCool = 0;
+        int deathLoop = 0;
 
         List<Enemy> enemies = new List<Enemy>();
 
@@ -31,15 +32,15 @@ namespace LegendOfZeldaFirstDungeon
         {
             InitializeComponent();
             OnStart();
-
-            player.x = 400;
-            player.y = 300;
         }
 
         public void OnStart()
         {
             Enemy keese1 = new Enemy(400, 500, 5, 56, 14, 0, 3, 0, "keese");
             enemies.Add(keese1);
+
+            player.x = 400;
+            player.y = 300;
         }
 
         private void Room1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -90,67 +91,9 @@ namespace LegendOfZeldaFirstDungeon
         {
             movement = false;
 
-            if (bDown && attackCool < 1)
-            {
-                attackCool = 9;
-                attack = true;
-            }
+            Attack();
 
-            if (attack)
-            {
-                foreach (Enemy i in enemies)
-                {
-                    player.Attack(i);
-                }
-            }
-
-            if (attackCool > 0)
-            {
-                attackCool--;
-            }
-            else
-            {
-                attack = false;
-            }
-
-            if (upArrowDown && attack == false && player.y > 260)
-            {
-                movement = player.Move("up");
-                player.direction = "up";
-            }
-            else if (upArrowDown && attack == false && player.x >= 440 && player.x <= 480)
-            {
-                movement = player.Move("up");
-                player.direction = "up";
-            }
-            if (downArrowDown && attack == false && player.y < 540)
-            {
-                movement = player.Move("down");
-                player.direction = "down";
-            }
-            if (leftArrowDown && attack == false && player.x > 157)
-            {
-                movement = player.Move("left");
-                player.direction = "left";
-            }
-            if (rightArrowDown && attack == false && player.x < 760)
-            {
-                movement = player.Move("right");
-                player.direction = "right";
-            }
-
-            if (movement)
-            {
-                spriteLoop++;
-            }
-            else
-            {
-                spriteLoop = 0;
-            }
-            if (spriteLoop > 19)
-            {
-                spriteLoop = 0;
-            }
+            Movement();
 
             for (int i = 0; i < enemies.Count; i++)
             {
@@ -178,12 +121,18 @@ namespace LegendOfZeldaFirstDungeon
                 {
                     enemies[i].immune--;
                 }
+
+                if (enemies[i].health <= 0)
+                {
+                    enemies.RemoveAt(i);
+                    deathLoop = 60;
+                }
             }
 
             Refresh();
         }
 
-        private void Room1_Paint(object sender, PaintEventArgs e)
+        private void Room1_Paint(object sender, PaintEventArgs e) //death order 1, 2, 8, 3, 8, 3, 4, 5, 6, 9, 7, 1
         {
             e.Graphics.DrawImage(Properties.Resources.UpDoor, 397, 197);
             //e.Graphics.FillRectangle(testBrush, enemies[0].x, enemies[0].y, enemies[0].width, enemies[0].height);
@@ -280,18 +229,25 @@ namespace LegendOfZeldaFirstDungeon
             #region Enemy Movement
             for (int i = 0; i < enemies.Count; i++)
             {
-                switch(enemies[i].name)
+                if (enemies[i].health > 0)
                 {
-                    case "keese":
-                        if (enemies[i].counter >= 0 && enemies[i].counter <= 4 || enemies[i].counter >= 10 && enemies[i].counter <= 14 || enemies[i].counter >= 20 && enemies[i].counter <= 24 || enemies[i].counter >= 30 && enemies[i].counter <= 34 || enemies[i].counter >= 40 && enemies[i].counter <= 44)
-                        {
-                            e.Graphics.DrawImage(Properties.Resources.Keese1, enemies[i].x, enemies[i].y);
-                        }
-                        else
-                        {
-                            e.Graphics.DrawImage(Properties.Resources.Keese2, enemies[i].x + 12, enemies[i].y);
-                        }
-                        break;
+                    switch (enemies[i].name)
+                    {
+                        case "keese":
+                            if (enemies[i].counter >= 0 && enemies[i].counter <= 4 || enemies[i].counter >= 10 && enemies[i].counter <= 14 || enemies[i].counter >= 20 && enemies[i].counter <= 24 || enemies[i].counter >= 30 && enemies[i].counter <= 34 || enemies[i].counter >= 40 && enemies[i].counter <= 44)
+                            {
+                                e.Graphics.DrawImage(Properties.Resources.Keese1, enemies[i].x, enemies[i].y);
+                            }
+                            else
+                            {
+                                e.Graphics.DrawImage(Properties.Resources.Keese2, enemies[i].x + 12, enemies[i].y);
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+
                 }
             }
 
@@ -338,8 +294,81 @@ namespace LegendOfZeldaFirstDungeon
             }
             #endregion
 
-            e.Graphics.DrawString($"{player.health}", testFont, testBrush, 100, 100);
-            e.Graphics.DrawString($"{enemies[0].counter}", testFont, testBrush, 100, 120);
+            #region Death Animation
+            if (deathLoop > 0)
+            {
+
+            }
+
+            #endregion
+        }
+
+        private void Attack()
+        {
+            if (bDown && attackCool < 1)
+            {
+                attackCool = 8;
+                attack = true;
+            }
+
+            if (attack)
+            {
+                foreach (Enemy i in enemies)
+                {
+                    player.Attack(i);
+                }
+            }
+
+            if (attackCool > 0)
+            {
+                attackCool--;
+            }
+            else
+            {
+                attack = false;
+            }
+        }
+
+        private void Movement()
+        {
+            if (upArrowDown && attack == false && player.y > 260)
+            {
+                movement = player.Move("up");
+                player.direction = "up";
+            }
+            else if (upArrowDown && attack == false && player.x >= 440 && player.x <= 480)
+            {
+                movement = player.Move("up");
+                player.direction = "up";
+            }
+            if (downArrowDown && attack == false && player.y < 540)
+            {
+                movement = player.Move("down");
+                player.direction = "down";
+            }
+            if (leftArrowDown && attack == false && player.x > 157)
+            {
+                movement = player.Move("left");
+                player.direction = "left";
+            }
+            if (rightArrowDown && attack == false && player.x < 760)
+            {
+                movement = player.Move("right");
+                player.direction = "right";
+            }
+
+            if (movement)
+            {
+                spriteLoop++;
+            }
+            else
+            {
+                spriteLoop = 0;
+            }
+            if (spriteLoop > 19)
+            {
+                spriteLoop = 0;
+            }
         }
     }
 }
