@@ -24,6 +24,7 @@ namespace LegendOfZeldaFirstDungeon
         int deathLoop = 0;
 
         List<Enemy> enemies = new List<Enemy>();
+        List<Death> deaths = new List<Death>();
 
         SolidBrush testBrush = new SolidBrush(Color.Red);
         Font testFont = new Font("Arial", 16);
@@ -36,7 +37,7 @@ namespace LegendOfZeldaFirstDungeon
 
         public void OnStart()
         {
-            Enemy keese1 = new Enemy(400, 500, 5, 56, 14, 0, 3, 0, "keese");
+            Enemy keese1 = new Enemy(400, 500, 5, 56, 14, 0, 1, 0, "keese");
             enemies.Add(keese1);
 
             player.x = 400;
@@ -124,9 +125,17 @@ namespace LegendOfZeldaFirstDungeon
 
                 if (enemies[i].health <= 0)
                 {
-                    enemies.RemoveAt(i);
+                    Death death = new Death(enemies[i].x, enemies[i].y);
+                    deaths.Add(death);
+
                     deathLoop = 60;
+                    enemies.RemoveAt(i);
                 }
+            }
+
+            if (deathLoop > 0)
+            {
+                deathLoop--;
             }
 
             Refresh();
@@ -245,9 +254,57 @@ namespace LegendOfZeldaFirstDungeon
                             break;
                     }
                 }
-                else
-                {
+            }
 
+            foreach (Death d in deaths)
+            {
+                if (deathLoop <= 60 && deathLoop >= 56)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death1, d.x, d.y);
+                }
+                else if (deathLoop <= 55 && deathLoop >= 51)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death2, d.x, d.y);
+                }
+                else if (deathLoop <= 50 && deathLoop >= 46)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death8, d.x, d.y);
+                }
+                else if (deathLoop <= 45 && deathLoop >= 41)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death3, d.x, d.y);
+                }
+                else if (deathLoop <= 40 && deathLoop >= 36)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death8, d.x, d.y);
+                }
+                else if (deathLoop <= 35 && deathLoop >= 31)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death3, d.x, d.y);
+                }
+                else if (deathLoop <= 30 && deathLoop >= 26)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death4, d.x, d.y);
+                }
+                else if (deathLoop <= 25 && deathLoop >= 21)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death5, d.x, d.y);
+                }
+                else if (deathLoop <= 20 && deathLoop >= 16)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death6, d.x, d.y);
+                }
+                else if (deathLoop <= 15 && deathLoop >= 11)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death9, d.x, d.y);
+                }
+                else if (deathLoop <= 10 && deathLoop >= 6)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death7, d.x, d.y);
+                }
+                else if (deathLoop <= 5 && deathLoop >= 1)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death1, d.x, d.y);
                 }
             }
 

@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Death.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -163,28 +164,28 @@
     <None Include="Resources\Keese2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Death4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Death5.png" />
+    <None Include="Resources\Death7.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Death6.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Death7.png" />
+    <None Include="Resources\Death5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Death4.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Death2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Death1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Death3.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Death8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Death1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Death9.png" />
