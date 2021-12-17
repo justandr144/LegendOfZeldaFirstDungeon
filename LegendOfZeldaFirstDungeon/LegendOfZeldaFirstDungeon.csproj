@@ -147,5 +147,20 @@
   <ItemGroup>
     <None Include="Resources\LinkAttackDown.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FullHeart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HalfHeart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EmptyHeart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Keese1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Keese2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

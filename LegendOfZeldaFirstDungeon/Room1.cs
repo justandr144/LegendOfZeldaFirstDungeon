@@ -38,7 +38,7 @@ namespace LegendOfZeldaFirstDungeon
 
         public void OnStart()
         {
-            Enemy keese1 = new Enemy(400, 500, 44, 56, 14, 0, 3, 0, "keese");
+            Enemy keese1 = new Enemy(400, 500, 5, 56, 14, 0, 3, 0, "keese");
             enemies.Add(keese1);
         }
 
@@ -186,7 +186,7 @@ namespace LegendOfZeldaFirstDungeon
         private void Room1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(Properties.Resources.UpDoor, 397, 197);
-            e.Graphics.FillRectangle(testBrush, enemies[0].x, enemies[0].y, enemies[0].width, enemies[0].height);
+            //e.Graphics.FillRectangle(testBrush, enemies[0].x, enemies[0].y, enemies[0].width, enemies[0].height);
             //e.Graphics.FillRectangle(testBrush, player.x + 47, player.y + 21, 48, 24);
 
             #region Player Movement
@@ -274,6 +274,67 @@ namespace LegendOfZeldaFirstDungeon
                             break;
                     }
                 }
+            }
+            #endregion
+
+            #region Enemy Movement
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                switch(enemies[i].name)
+                {
+                    case "keese":
+                        if (enemies[i].counter >= 0 && enemies[i].counter <= 4 || enemies[i].counter >= 10 && enemies[i].counter <= 14 || enemies[i].counter >= 20 && enemies[i].counter <= 24 || enemies[i].counter >= 30 && enemies[i].counter <= 34 || enemies[i].counter >= 40 && enemies[i].counter <= 44)
+                        {
+                            e.Graphics.DrawImage(Properties.Resources.Keese1, enemies[i].x, enemies[i].y);
+                        }
+                        else
+                        {
+                            e.Graphics.DrawImage(Properties.Resources.Keese2, enemies[i].x + 12, enemies[i].y);
+                        }
+                        break;
+                }
+            }
+
+            #endregion
+
+            #region Health Display
+            switch (player.health)
+            {
+                case (0):
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 650, 100);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 100);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 100);
+                    break;
+                case (1):
+                    e.Graphics.DrawImage(Properties.Resources.HalfHeart, 650, 100);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 100);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 100);
+                    break;
+                case (2):
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 100);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 100);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 100);
+                    break;
+                case (3):
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 100);
+                    e.Graphics.DrawImage(Properties.Resources.HalfHeart, 685, 100);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 100);
+                    break;
+                case (4):
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 100);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 100);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 100);
+                    break;
+                case (5):
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 100);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 100);
+                    e.Graphics.DrawImage(Properties.Resources.HalfHeart, 720, 100);
+                    break;
+                case (6):
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 100);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 100);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 720, 100);
+                    break;
             }
             #endregion
 

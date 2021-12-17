@@ -11,6 +11,9 @@ namespace LegendOfZeldaFirstDungeon
     {
         public int x, y, speed, width, height, counter, health, immune;
         public string name;
+        int directX = 1;
+        int directY = 2;
+
         Random randGen = new Random();
 
         public Enemy(int _x, int _y, int _speed, int _width, int _height, int _counter, int _health, int _immune, string _name)
@@ -31,30 +34,34 @@ namespace LegendOfZeldaFirstDungeon
             switch (i.name)
             {
                 case "keese":
-                    if (i.counter >= 50)
+                    if (i.counter >= 30)
                     {
-                        int directX = randGen.Next(1, 3);
-                        int directY = randGen.Next(1, 3);
-
-                        if (directX == 1)
+                        if (directX == 1 && i.x < 760)
                         {
                             i.x += i.speed;
                         }
-                        else
+                        else if (i.x > 157)
                         {
+                            directX = 2;
                             i.x -= i.speed;
                         }
 
-                        if (directY == 1)
+                        if (directY == 1 && i.y < 540)
                         {
                             i.y += i.speed;
                         }
-                        else
+                        else if (i.y > 260)
                         {
+                            directY = 2;
                             i.y -= i.speed;
                         }
 
-                        i.counter = 0;
+                        if (i.counter >= 50)
+                        {
+                            directX = randGen.Next(1, 3);
+                            directY = randGen.Next(1, 3);
+                            i.counter = 0;
+                        }
                     }
                     break;
             }
