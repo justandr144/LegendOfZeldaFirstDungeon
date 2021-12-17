@@ -147,6 +147,61 @@ namespace LegendOfZeldaFirstDungeon
             //e.Graphics.FillRectangle(testBrush, enemies[0].x, enemies[0].y, enemies[0].width, enemies[0].height);
             //e.Graphics.FillRectangle(testBrush, player.x + 47, player.y + 21, 48, 24);
 
+            #region Death Animation
+            foreach (Death d in deaths)
+            {
+                if (deathLoop <= 60 && deathLoop >= 56)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death1, d.x, d.y);
+                }
+                else if (deathLoop <= 55 && deathLoop >= 51)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death2, d.x, d.y);
+                }
+                else if (deathLoop <= 50 && deathLoop >= 46)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death8, d.x, d.y);
+                }
+                else if (deathLoop <= 45 && deathLoop >= 41)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death3, d.x, d.y);
+                }
+                else if (deathLoop <= 40 && deathLoop >= 36)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death8, d.x, d.y);
+                }
+                else if (deathLoop <= 35 && deathLoop >= 31)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death3, d.x, d.y);
+                }
+                else if (deathLoop <= 30 && deathLoop >= 26)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death4, d.x, d.y);
+                }
+                else if (deathLoop <= 25 && deathLoop >= 21)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death5, d.x, d.y);
+                }
+                else if (deathLoop <= 20 && deathLoop >= 16)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death6, d.x, d.y);
+                }
+                else if (deathLoop <= 15 && deathLoop >= 11)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death9, d.x, d.y);
+                }
+                else if (deathLoop <= 10 && deathLoop >= 6)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death7, d.x, d.y);
+                }
+                else if (deathLoop <= 5 && deathLoop >= 1)
+                {
+                    e.Graphics.DrawImage(Properties.Resources.Death1, d.x, d.y);
+                }
+            }
+
+            #endregion
+
             #region Player Movement
             if (playImmune == 0 || playImmune > 0 && playImmune < 5 || playImmune > 10 && playImmune < 15 || playImmune > 20 && playImmune < 25 || playImmune > 30 && playImmune < 35 || playImmune > 40 && playImmune < 45)
             {
@@ -256,58 +311,6 @@ namespace LegendOfZeldaFirstDungeon
                 }
             }
 
-            foreach (Death d in deaths)
-            {
-                if (deathLoop <= 60 && deathLoop >= 56)
-                {
-                    e.Graphics.DrawImage(Properties.Resources.Death1, d.x, d.y);
-                }
-                else if (deathLoop <= 55 && deathLoop >= 51)
-                {
-                    e.Graphics.DrawImage(Properties.Resources.Death2, d.x, d.y);
-                }
-                else if (deathLoop <= 50 && deathLoop >= 46)
-                {
-                    e.Graphics.DrawImage(Properties.Resources.Death8, d.x, d.y);
-                }
-                else if (deathLoop <= 45 && deathLoop >= 41)
-                {
-                    e.Graphics.DrawImage(Properties.Resources.Death3, d.x, d.y);
-                }
-                else if (deathLoop <= 40 && deathLoop >= 36)
-                {
-                    e.Graphics.DrawImage(Properties.Resources.Death8, d.x, d.y);
-                }
-                else if (deathLoop <= 35 && deathLoop >= 31)
-                {
-                    e.Graphics.DrawImage(Properties.Resources.Death3, d.x, d.y);
-                }
-                else if (deathLoop <= 30 && deathLoop >= 26)
-                {
-                    e.Graphics.DrawImage(Properties.Resources.Death4, d.x, d.y);
-                }
-                else if (deathLoop <= 25 && deathLoop >= 21)
-                {
-                    e.Graphics.DrawImage(Properties.Resources.Death5, d.x, d.y);
-                }
-                else if (deathLoop <= 20 && deathLoop >= 16)
-                {
-                    e.Graphics.DrawImage(Properties.Resources.Death6, d.x, d.y);
-                }
-                else if (deathLoop <= 15 && deathLoop >= 11)
-                {
-                    e.Graphics.DrawImage(Properties.Resources.Death9, d.x, d.y);
-                }
-                else if (deathLoop <= 10 && deathLoop >= 6)
-                {
-                    e.Graphics.DrawImage(Properties.Resources.Death7, d.x, d.y);
-                }
-                else if (deathLoop <= 5 && deathLoop >= 1)
-                {
-                    e.Graphics.DrawImage(Properties.Resources.Death1, d.x, d.y);
-                }
-            }
-
             #endregion
 
             #region Health Display
@@ -349,14 +352,6 @@ namespace LegendOfZeldaFirstDungeon
                     e.Graphics.DrawImage(Properties.Resources.FullHeart, 720, 100);
                     break;
             }
-            #endregion
-
-            #region Death Animation
-            if (deathLoop > 0)
-            {
-
-            }
-
             #endregion
         }
 
