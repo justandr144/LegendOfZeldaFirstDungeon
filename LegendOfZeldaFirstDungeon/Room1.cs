@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace LegendOfZeldaFirstDungeon
 {
@@ -28,6 +29,8 @@ namespace LegendOfZeldaFirstDungeon
 
         SolidBrush testBrush = new SolidBrush(Color.Red);
         Font testFont = new Font("Arial", 16);
+
+        System.Windows.Media.MediaPlayer attackSound;
         #endregion
         public Room1()
         {
@@ -42,6 +45,9 @@ namespace LegendOfZeldaFirstDungeon
 
             player.x = 400;
             player.y = 300;
+
+            attackSound = new System.Windows.Media.MediaPlayer();
+            attackSound.Open(new Uri(Application.StartupPath + "/Resources/AttackSound.mp3"));
         }
 
         private void Room1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -128,7 +134,7 @@ namespace LegendOfZeldaFirstDungeon
                     Death death = new Death(enemies[i].x, enemies[i].y);
                     deaths.Add(death);
 
-                    deathLoop = 60;
+                    deathLoop = 36;
                     enemies.RemoveAt(i);
                 }
             }
@@ -150,51 +156,51 @@ namespace LegendOfZeldaFirstDungeon
             #region Death Animation
             foreach (Death d in deaths)
             {
-                if (deathLoop <= 60 && deathLoop >= 56)
+                if (deathLoop <= 36 && deathLoop >= 34)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death1, d.x, d.y);
                 }
-                else if (deathLoop <= 55 && deathLoop >= 51)
+                else if (deathLoop <= 33 && deathLoop >= 31)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death2, d.x, d.y);
                 }
-                else if (deathLoop <= 50 && deathLoop >= 46)
+                else if (deathLoop <= 30 && deathLoop >= 28)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death8, d.x, d.y);
                 }
-                else if (deathLoop <= 45 && deathLoop >= 41)
+                else if (deathLoop <= 27 && deathLoop >= 25)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death3, d.x, d.y);
                 }
-                else if (deathLoop <= 40 && deathLoop >= 36)
+                else if (deathLoop <= 24 && deathLoop >= 22)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death8, d.x, d.y);
                 }
-                else if (deathLoop <= 35 && deathLoop >= 31)
+                else if (deathLoop <= 21 && deathLoop >= 19)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death3, d.x, d.y);
                 }
-                else if (deathLoop <= 30 && deathLoop >= 26)
+                else if (deathLoop <= 18 && deathLoop >= 16)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death4, d.x, d.y);
                 }
-                else if (deathLoop <= 25 && deathLoop >= 21)
+                else if (deathLoop <= 15 && deathLoop >= 13)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death5, d.x, d.y);
                 }
-                else if (deathLoop <= 20 && deathLoop >= 16)
+                else if (deathLoop <= 12 && deathLoop >= 10)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death6, d.x, d.y);
                 }
-                else if (deathLoop <= 15 && deathLoop >= 11)
+                else if (deathLoop <= 9 && deathLoop >= 7)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death9, d.x, d.y);
                 }
-                else if (deathLoop <= 10 && deathLoop >= 6)
+                else if (deathLoop <= 6 && deathLoop >= 4)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death7, d.x, d.y);
                 }
-                else if (deathLoop <= 5 && deathLoop >= 1)
+                else if (deathLoop <= 3 && deathLoop >= 1)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death1, d.x, d.y);
                 }
@@ -361,6 +367,7 @@ namespace LegendOfZeldaFirstDungeon
             {
                 attackCool = 8;
                 attack = true;
+                attackSound.Play();
             }
 
             if (attack)
@@ -378,6 +385,7 @@ namespace LegendOfZeldaFirstDungeon
             else
             {
                 attack = false;
+                attackSound.Stop();
             }
         }
 

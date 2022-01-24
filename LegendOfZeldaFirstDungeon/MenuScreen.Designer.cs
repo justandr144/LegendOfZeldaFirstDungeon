@@ -29,7 +29,15 @@ namespace LegendOfZeldaFirstDungeon
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.gameLoop = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
+            // 
+            // gameLoop
+            // 
+            this.gameLoop.Enabled = true;
+            this.gameLoop.Interval = 20;
+            this.gameLoop.Tick += new System.EventHandler(this.gameLoop_Tick);
             // 
             // MenuScreen
             // 
@@ -44,5 +52,7 @@ namespace LegendOfZeldaFirstDungeon
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer gameLoop;
     }
 }

@@ -7,14 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace LegendOfZeldaFirstDungeon
 {
     public partial class MenuScreen : UserControl
     {
+        System.Windows.Media.MediaPlayer music;
+
+        int musicCounter = 2500;
+
         public MenuScreen()
         {
             InitializeComponent();
+
+            music = new System.Windows.Media.MediaPlayer();
+            music.Open(new Uri(Application.StartupPath + "/Resources/ZeldaTheme.mp3"));
         }
 
         private void MenuScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -22,6 +30,9 @@ namespace LegendOfZeldaFirstDungeon
             switch (e.KeyCode)
             {
                 case Keys.B:
+                    music.Stop();
+                    Form1.gameStart = true;
+
                     Form f = this.FindForm();
                     f.Controls.Remove(this);
 
@@ -34,6 +45,18 @@ namespace LegendOfZeldaFirstDungeon
                 case Keys.M:
                     Application.Exit();
                     break;
+            }
+        }
+
+        private void gameLoop_Tick(object sender, EventArgs e)
+        {
+            musicCounter++;
+
+            if (musicCounter >= 2500)
+            {
+                music.Stop();
+                music.Play();
+                musicCounter = 0;
             }
         }
     }

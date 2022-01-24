@@ -61,6 +61,16 @@ namespace LegendOfZeldaFirstDungeon.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] AttackSound {
+            get {
+                object obj = ResourceManager.GetObject("AttackSound", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Death1 {
@@ -147,6 +157,16 @@ namespace LegendOfZeldaFirstDungeon.Properties {
             get {
                 object obj = ResourceManager.GetObject("Death9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] DungeonTheme {
+            get {
+                object obj = ResourceManager.GetObject("DungeonTheme", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -347,6 +367,16 @@ namespace LegendOfZeldaFirstDungeon.Properties {
             get {
                 object obj = ResourceManager.GetObject("UpDoor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ZeldaTheme {
+            get {
+                object obj = ResourceManager.GetObject("ZeldaTheme", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }
