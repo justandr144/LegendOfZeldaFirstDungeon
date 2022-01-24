@@ -19,6 +19,7 @@ namespace LegendOfZeldaFirstDungeon
         public static int playerSpeed = 7;
         public static int playerHealth = 6;
         public static int playerImage = 0;
+        public static int score = 0;
         public static string playerDirect = "up";
         public static bool gameStart = false;
 

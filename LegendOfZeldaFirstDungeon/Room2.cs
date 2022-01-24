@@ -7,11 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace LegendOfZeldaFirstDungeon
 {
-    public partial class Room1 : UserControl
+    public partial class Room2 : UserControl
     {
         #region Global Variables
         Link player = new Link(Form1.playerX, Form1.playerY, Form1.playerSpeed, 56, Form1.playerHealth, Form1.playerDirect);
@@ -24,7 +23,6 @@ namespace LegendOfZeldaFirstDungeon
         int spriteLoop = 0;
         int playImmune = 0;
         int attackCool = 0;
-        int deathLoop = 0;
         int scoreLoop = 50;
 
         List<Enemy> enemies = new List<Enemy>();
@@ -33,20 +31,24 @@ namespace LegendOfZeldaFirstDungeon
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         Font exitFont = new Font("Arial", 16);
+
         Font scoreFont = new Font("Arial", 20);
 
         System.Windows.Media.MediaPlayer attackSound;
         #endregion
-        public Room1()
+        public Room2()
         {
             InitializeComponent();
             OnStart();
         }
-
         public void OnStart()
         {
-            Enemy keese1 = new Enemy(458, 290, 5, 56, 28, 0, 1, 0, 1, 2, "keese");
+            Enemy keese1 = new Enemy(458, 290, 5, 56, 28, 40, 1, 0, 1, 2, "keese");
+            Enemy keese2 = new Enemy(250, 400, 5, 56, 28, 20, 1, 0, 2, 2, "keese");
+            Enemy keese3 = new Enemy(650, 400, 5, 56, 28, 0, 1, 0, 2, 1, "keese");
             enemies.Add(keese1);
+            enemies.Add(keese2);
+            enemies.Add(keese3);
 
             player.x = 458;
             player.y = 550;
@@ -55,7 +57,7 @@ namespace LegendOfZeldaFirstDungeon
             attackSound.Open(new Uri(Application.StartupPath + "/Resources/AttackSound.mp3"));
         }
 
-        private void Room1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void Room2_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -77,7 +79,7 @@ namespace LegendOfZeldaFirstDungeon
             }
         }
 
-        private void Room1_KeyUp(object sender, KeyEventArgs e)
+        private void Room2_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -108,10 +110,10 @@ namespace LegendOfZeldaFirstDungeon
 
             Movement();
 
-            for (int i = 0; i < enemies.Count; i++)
+            foreach (Enemy i in enemies)
             {
-                enemies[i].counter++;
-                enemies[i].Move(enemies[i]);
+                i.counter++;
+                i.Move(i);
             }
 
             foreach (Enemy i in enemies)
@@ -142,7 +144,6 @@ namespace LegendOfZeldaFirstDungeon
                     Death death = new Death(enemies[i].x, enemies[i].y, 36);
                     deaths.Add(death);
 
-                    deathLoop = 36;
                     enemies.RemoveAt(i);
                     Form1.score += 100;
                 }
@@ -151,12 +152,12 @@ namespace LegendOfZeldaFirstDungeon
             if (player.y < 229 && enemies.Count == 0)
             {
                 clear = true;
+                falseExit = false;
             }
 
             if (clear)
             {
                 clear = false;
-                falseExit = false;
                 gameLoop.Enabled = false;
 
                 Form f = this.FindForm();
@@ -173,9 +174,12 @@ namespace LegendOfZeldaFirstDungeon
                 falseExit = true;
             }
 
-            if (deathLoop > 0)
+            foreach (Death d in deaths)
             {
-                deathLoop--;
+                if (d.timer > 0)
+                {
+                    d.timer--;
+                }
             }
 
             if (scoreLoop <= 0)
@@ -187,7 +191,7 @@ namespace LegendOfZeldaFirstDungeon
             Refresh();
         }
 
-        private void Room1_Paint(object sender, PaintEventArgs e) //death order 1, 2, 8, 3, 8, 3, 4, 5, 6, 9, 7, 1
+        private void Room2_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(Properties.Resources.UpDoor, 397, 197);
             //e.Graphics.FillRectangle(testBrush, enemies[0].x, enemies[0].y, enemies[0].width, enemies[0].height);
@@ -196,51 +200,51 @@ namespace LegendOfZeldaFirstDungeon
             #region Death Animation
             foreach (Death d in deaths)
             {
-                if (deathLoop <= 36 && deathLoop >= 34)
+                if (d.timer <= 36 && d.timer >= 34)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death1, d.x, d.y);
                 }
-                else if (deathLoop <= 33 && deathLoop >= 31)
+                else if (d.timer <= 33 && d.timer >= 31)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death2, d.x, d.y);
                 }
-                else if (deathLoop <= 30 && deathLoop >= 28)
+                else if (d.timer <= 30 && d.timer >= 28)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death8, d.x, d.y);
                 }
-                else if (deathLoop <= 27 && deathLoop >= 25)
+                else if (d.timer <= 27 && d.timer >= 25)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death3, d.x, d.y);
                 }
-                else if (deathLoop <= 24 && deathLoop >= 22)
+                else if (d.timer <= 24 && d.timer >= 22)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death8, d.x, d.y);
                 }
-                else if (deathLoop <= 21 && deathLoop >= 19)
+                else if (d.timer <= 21 && d.timer >= 19)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death3, d.x, d.y);
                 }
-                else if (deathLoop <= 18 && deathLoop >= 16)
+                else if (d.timer <= 18 && d.timer >= 16)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death4, d.x, d.y);
                 }
-                else if (deathLoop <= 15 && deathLoop >= 13)
+                else if (d.timer <= 15 && d.timer >= 13)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death5, d.x, d.y);
                 }
-                else if (deathLoop <= 12 && deathLoop >= 10)
+                else if (d.timer <= 12 && d.timer >= 10)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death6, d.x, d.y);
                 }
-                else if (deathLoop <= 9 && deathLoop >= 7)
+                else if (d.timer <= 9 && d.timer >= 7)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death9, d.x, d.y);
                 }
-                else if (deathLoop <= 6 && deathLoop >= 4)
+                else if (d.timer <= 6 && d.timer >= 4)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death7, d.x, d.y);
                 }
-                else if (deathLoop <= 3 && deathLoop >= 1)
+                else if (d.timer <= 3 && d.timer >= 1)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death1, d.x, d.y);
                 }

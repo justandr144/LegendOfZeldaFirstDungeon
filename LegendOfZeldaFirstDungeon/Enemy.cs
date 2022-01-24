@@ -9,14 +9,12 @@ namespace LegendOfZeldaFirstDungeon
 {
     class Enemy
     {
-        public int x, y, speed, width, height, counter, health, immune;
+        public int x, y, speed, width, height, counter, health, immune, directX, directY;
         public string name;
-        int directX = 1;
-        int directY = 2;
 
         Random randGen = new Random();
 
-        public Enemy(int _x, int _y, int _speed, int _width, int _height, int _counter, int _health, int _immune, string _name)
+        public Enemy(int _x, int _y, int _speed, int _width, int _height, int _counter, int _health, int _immune, int _directX, int _directY, string _name)
         {
             x = _x;
             y = _y;
@@ -26,6 +24,8 @@ namespace LegendOfZeldaFirstDungeon
             counter = _counter;
             health = _health;
             immune = _immune;
+            directX = _directX;
+            directY = _directY;
             name = _name;
         }
 
@@ -36,7 +36,7 @@ namespace LegendOfZeldaFirstDungeon
                 case "keese":
                     if (i.counter >= 30)
                     {
-                        if (directX == 1)
+                        if (i.directX == 1)
                         {
                             if (i.x < 760)
                             {
@@ -44,10 +44,10 @@ namespace LegendOfZeldaFirstDungeon
                             }
                             else
                             {
-                                directX = 2;
+                                i.directX = 2;
                             }
                         }
-                        else if (directX == 2)
+                        else if (i.directX == 2)
                         {
                             if (i.x > 157)
                             {
@@ -55,11 +55,11 @@ namespace LegendOfZeldaFirstDungeon
                             }
                             else
                             {
-                                directX = 1;
+                                i.directX = 1;
                             }
                         }
 
-                        if (directY == 1)
+                        if (i.directY == 1)
                         {
                             if (i.y < 540)
                             {
@@ -67,10 +67,10 @@ namespace LegendOfZeldaFirstDungeon
                             }
                             else
                             {
-                                directY = 2;
+                                i.directY = 2;
                             }
                         }
-                        else if (directY == 2)
+                        else if (i.directY == 2)
                         {
                             if (i.y > 260)
                             {
@@ -78,14 +78,14 @@ namespace LegendOfZeldaFirstDungeon
                             }
                             else
                             {
-                                directY = 1;
+                                i.directY = 1;
                             }
                         }
 
                         if (i.counter >= 50)
                         {
-                            directX = randGen.Next(1, 3);
-                            directY = randGen.Next(1, 3);
+                            i.directX = randGen.Next(1, 3);
+                            i.directY = randGen.Next(1, 3);
                             i.counter = 0;
                         }
                     }

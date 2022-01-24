@@ -8,12 +8,13 @@ namespace LegendOfZeldaFirstDungeon
 {
     class Death
     {
-        public int x, y;
+        public int x, y, timer;
 
-        public Death(int _x, int _y)
+        public Death (int _x, int _y, int _timer)
         {
             x = _x;
             y = _y;
+            timer = _timer;
         }
     }
 }
