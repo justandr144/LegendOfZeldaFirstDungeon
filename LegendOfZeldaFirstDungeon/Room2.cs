@@ -31,8 +31,9 @@ namespace LegendOfZeldaFirstDungeon
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         Font exitFont = new Font("Arial", 16);
-
         Font scoreFont = new Font("Arial", 20);
+
+        Random randGen = new Random();
 
         System.Windows.Media.MediaPlayer attackSound;
         #endregion
@@ -41,7 +42,7 @@ namespace LegendOfZeldaFirstDungeon
             InitializeComponent();
             OnStart();
         }
-        public void OnStart()
+        public void OnStart()       //Setting starting positions and adding enemies
         {
             Enemy keese1 = new Enemy(458, 290, 5, 56, 28, 40, 1, 0, 1, 2, "keese");
             Enemy keese2 = new Enemy(250, 400, 5, 56, 28, 20, 1, 0, 2, 2, "keese");
@@ -57,7 +58,7 @@ namespace LegendOfZeldaFirstDungeon
             attackSound.Open(new Uri(Application.StartupPath + "/Resources/AttackSound.mp3"));
         }
 
-        private void Room2_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void Room2_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) //Key press
         {
             switch (e.KeyCode)
             {
@@ -79,7 +80,7 @@ namespace LegendOfZeldaFirstDungeon
             }
         }
 
-        private void Room2_KeyUp(object sender, KeyEventArgs e)
+        private void Room2_KeyUp(object sender, KeyEventArgs e)     //Key release
         {
             switch (e.KeyCode)
             {
@@ -110,15 +111,15 @@ namespace LegendOfZeldaFirstDungeon
 
             Movement();
 
-            foreach (Enemy i in enemies)
+            foreach (Enemy i in enemies)     //Preparing enemies for movement
             {
                 i.counter++;
-                i.Move(i);
+                i.Move(i, randGen);
             }
 
             foreach (Enemy i in enemies)
             {
-                if (player.Collision(i) && playImmune < 1)
+                if (player.Collision(i) && playImmune < 1)        //Enemies hurting player
                 {
                     Form1.playerHealth--;
                     player.health = Form1.playerHealth;
@@ -127,12 +128,12 @@ namespace LegendOfZeldaFirstDungeon
                 }
             }
 
-            if (playImmune > 0)
+            if (playImmune > 0)     //Imunnity cooldown
             {
                 playImmune--;
             }
 
-            for (int i = 0; i < enemies.Count; i++)
+            for (int i = 0; i < enemies.Count; i++)     //Enemy immune cooldown and deaths
             {
                 if (enemies[i].immune > 0)
                 {
@@ -149,13 +150,13 @@ namespace LegendOfZeldaFirstDungeon
                 }
             }
 
-            if (player.y < 229 && enemies.Count == 0)
+            if (player.y < 229 && enemies.Count == 0)       //Clearing room
             {
                 clear = true;
                 falseExit = false;
             }
 
-            if (clear)
+            if (clear)      //Load next room if current is cleared
             {
                 clear = false;
                 gameLoop.Enabled = false;
@@ -169,12 +170,12 @@ namespace LegendOfZeldaFirstDungeon
 
                 r2.Focus();
             }
-            else if (player.y < 229 && enemies.Count > 0)
+            else if (player.y < 229 && enemies.Count > 0)   //Or tell player enemies remaining
             {
                 falseExit = true;
             }
 
-            foreach (Death d in deaths)
+            foreach (Death d in deaths)      //death animation cooldown
             {
                 if (d.timer > 0)
                 {
@@ -182,7 +183,7 @@ namespace LegendOfZeldaFirstDungeon
                 }
             }
 
-            if (scoreLoop <= 0)
+            if (scoreLoop <= 0)     //Lower score over time
             {
                 Form1.score--;
                 scoreLoop = 50;
@@ -439,9 +440,9 @@ namespace LegendOfZeldaFirstDungeon
                 attack = false;
                 attackSound.Stop();
             }
-        }
+        }   //Player attacking method
 
-        private void Movement()
+        private void Movement()     //player movement method
         {
             if (upArrowDown && attack == false && player.y > 260)
             {

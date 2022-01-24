@@ -35,6 +35,8 @@ namespace LegendOfZeldaFirstDungeon
         Font exitFont = new Font("Arial", 16);
         Font scoreFont = new Font("Arial", 20);
 
+        Random randGen = new Random();
+
         System.Windows.Media.MediaPlayer attackSound;
         #endregion
         public Room1()
@@ -43,7 +45,7 @@ namespace LegendOfZeldaFirstDungeon
             OnStart();
         }
 
-        public void OnStart()
+        public void OnStart()       //Setting starting positions and adding enemies
         {
             Enemy keese1 = new Enemy(458, 290, 5, 56, 28, 0, 1, 0, 1, 2, "keese");
             enemies.Add(keese1);
@@ -55,7 +57,7 @@ namespace LegendOfZeldaFirstDungeon
             attackSound.Open(new Uri(Application.StartupPath + "/Resources/AttackSound.mp3"));
         }
 
-        private void Room1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void Room1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)     //Key press
         {
             switch (e.KeyCode)
             {
@@ -77,7 +79,7 @@ namespace LegendOfZeldaFirstDungeon
             }
         }
 
-        private void Room1_KeyUp(object sender, KeyEventArgs e)
+        private void Room1_KeyUp(object sender, KeyEventArgs e)     //Key release
         {
             switch (e.KeyCode)
             {
@@ -108,13 +110,13 @@ namespace LegendOfZeldaFirstDungeon
 
             Movement();
 
-            for (int i = 0; i < enemies.Count; i++)
+            for (int i = 0; i < enemies.Count; i++)     //Preparing enemies for movement
             {
                 enemies[i].counter++;
-                enemies[i].Move(enemies[i]);
+                enemies[i].Move(enemies[i], randGen);
             }
 
-            foreach (Enemy i in enemies)
+            foreach (Enemy i in enemies)        //Enemies hurting player
             {
                 if (player.Collision(i) && playImmune < 1)
                 {
@@ -125,12 +127,12 @@ namespace LegendOfZeldaFirstDungeon
                 }
             }
 
-            if (playImmune > 0)
+            if (playImmune > 0)     //Imunnity cooldown
             {
                 playImmune--;
             }
 
-            for (int i = 0; i < enemies.Count; i++)
+            for (int i = 0; i < enemies.Count; i++)     //Enemy immune cooldown and deaths
             {
                 if (enemies[i].immune > 0)
                 {
@@ -148,12 +150,12 @@ namespace LegendOfZeldaFirstDungeon
                 }
             }
 
-            if (player.y < 229 && enemies.Count == 0)
+            if (player.y < 229 && enemies.Count == 0)     //Clearing room
             {
                 clear = true;
             }
 
-            if (clear)
+            if (clear)      //Load next room if current is cleared
             {
                 clear = false;
                 falseExit = false;
@@ -168,17 +170,17 @@ namespace LegendOfZeldaFirstDungeon
 
                 r2.Focus();
             }
-            else if (player.y < 229 && enemies.Count > 0)
+            else if (player.y < 229 && enemies.Count > 0)   //Or tell player enemies remaining
             {
                 falseExit = true;
             }
 
-            if (deathLoop > 0)
+            if (deathLoop > 0)      //death animation cooldown
             {
                 deathLoop--;
             }
 
-            if (scoreLoop <= 0)
+            if (scoreLoop <= 0)     //Lower score over time
             {
                 Form1.score--;
                 scoreLoop = 50;
@@ -409,7 +411,7 @@ namespace LegendOfZeldaFirstDungeon
             #endregion
         }
 
-        private void Attack()
+        private void Attack()   //Player attacking method
         {
             if (bDown && attackCool < 1)
             {
@@ -437,7 +439,7 @@ namespace LegendOfZeldaFirstDungeon
             }
         }
 
-        private void Movement()
+        private void Movement()     //player movement method
         {
             if (upArrowDown && attack == false && player.y > 260)
             {

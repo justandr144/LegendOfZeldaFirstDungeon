@@ -12,8 +12,6 @@ namespace LegendOfZeldaFirstDungeon
         public int x, y, speed, width, height, counter, health, immune, directX, directY;
         public string name;
 
-        Random randGen = new Random();
-
         public Enemy(int _x, int _y, int _speed, int _width, int _height, int _counter, int _health, int _immune, int _directX, int _directY, string _name)
         {
             x = _x;
@@ -29,7 +27,7 @@ namespace LegendOfZeldaFirstDungeon
             name = _name;
         }
 
-        public void Move(Enemy i)
+        public void Move(Enemy i, Random randGen)
         {
             switch (i.name)
             {

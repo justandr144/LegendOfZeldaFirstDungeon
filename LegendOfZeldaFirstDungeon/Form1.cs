@@ -13,7 +13,7 @@ namespace LegendOfZeldaFirstDungeon
 {
     public partial class Form1 : Form
     {
-        public static int playerX = 0;
+        public static int playerX = 0;  //Variables
         public static int playerY = 0;
         public static int playerSize = 56;
         public static int playerSpeed = 7;
@@ -34,7 +34,7 @@ namespace LegendOfZeldaFirstDungeon
             music.Open(new Uri(Application.StartupPath + "/Resources/DungeonTheme.mp3"));
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e) //Open main menu
         {
             MenuScreen ms = new MenuScreen();
             this.Controls.Add(ms);
@@ -45,7 +45,7 @@ namespace LegendOfZeldaFirstDungeon
 
         private void gameLoop_Tick(object sender, EventArgs e)
         {
-            if (gameStart)
+            if (gameStart) //For dungeon music to play consistently throughout rooms
             {
                 musicCounter++;
 
