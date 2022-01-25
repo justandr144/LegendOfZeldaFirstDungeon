@@ -27,7 +27,7 @@ namespace LegendOfZeldaFirstDungeon
             name = _name;
         }
 
-        public void Move(Enemy i, Random randGen)
+        public void Move(Enemy i, Random randGen)       //Enemy movement
         {
             switch (i.name)
             {
@@ -141,7 +141,34 @@ namespace LegendOfZeldaFirstDungeon
                         }
                     }
                     break;
+                case "octorok":     //Projectile movement since enemy doesn't move
+                    if (i.counter >= 70)
+                    {
+                        switch (i.directX)
+                        {
+                            case 1:     //Left
+
+                                break;
+                            case 2:     //Down
+
+                                break;
+                            case 3:     //Right
+
+                                break;
+                        }
+                    }
+                    break;
             }
+        }
+
+        public bool Shoot(Enemy i)
+        {
+            if (i.name == "octorok" && i.counter >= 50)
+            {
+                i.counter = 0;
+                return true;
+            }
+            return false;
         }
     }
 }

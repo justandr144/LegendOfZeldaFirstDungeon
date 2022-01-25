@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
@@ -21,12 +22,14 @@ namespace LegendOfZeldaFirstDungeon
         bool attack = false;
         bool falseExit = false;
         bool clear = false;
+        bool shoot = false;
         int spriteLoop = 0;
         int playImmune = 0;
         int attackCool = 0;
         int scoreLoop = 50;
 
         List<Enemy> enemies = new List<Enemy>();
+        List<Projectile> projectiles = new List<Projectile>();
         List<Death> deaths = new List<Death>();
 
         SolidBrush redBrush = new SolidBrush(Color.Red);
@@ -63,12 +66,34 @@ namespace LegendOfZeldaFirstDungeon
                     this.BackgroundImage = Properties.Resources.UpDownRoom;
                     break;
                 case 3:
-                    Enemy Stalfos1 = new Enemy(458, 290, 4, 53, 56, 0, 3, 0, 1, 2, "stalfos");
+                    Enemy stalfos1 = new Enemy(458, 290, 4, 53, 56, 0, 3, 0, 1, 2, "stalfos");
                     Enemy keese5 = new Enemy(250, 400, 6, 56, 28, 20, 1, 0, 2, 2, "keese");
                     Enemy keese6 = new Enemy(650, 400, 6, 56, 28, 0, 1, 0, 2, 1, "keese");
-                    enemies.Add(Stalfos1);
+                    enemies.Add(stalfos1);
                     enemies.Add(keese5);
                     enemies.Add(keese6);
+                    break;
+                case 4:
+                    Enemy stalfos2 = new Enemy(650, 290, 4, 53, 56, 0, 3, 0, 1, 2, "stalfos");
+                    Enemy stalfos3 = new Enemy(250, 290, 4, 53, 56, 0, 3, 0, 1, 2, "stalfos");
+                    Enemy octorok1 = new Enemy(115, 262, 8, 49, 56, 0, 2, 0, 3, 0, "octorok");
+                    Enemy octorok2 = new Enemy(708, 480, 8, 49, 56, 0, 2, 0, 1, 0, "octorok");
+                    enemies.Add(stalfos2);
+                    enemies.Add(stalfos3);
+                    enemies.Add(octorok1);
+                    enemies.Add(octorok2);
+                    break;
+                case 5:
+                    Enemy octorok3 = new Enemy(409, 220, 8, 56, 49, 0, 2, 0, 2, 0, "octorok");
+                    Enemy stalfos4 = new Enemy(250, 290, 4, 53, 56, 0, 3, 0, 1, 2, "stalfos");
+                    Enemy stalfos5 = new Enemy(650, 290, 4, 53, 56, 0, 3, 0, 1, 2, "stalfos");
+                    Enemy keese7 = new Enemy(250, 480, 6, 56, 28, 0, 1, 0, 2, 1, "keese");
+                    Enemy keese8 = new Enemy(650, 480, 6, 56, 28, 30, 1, 0, 2, 2, "keese");
+                    enemies.Add(octorok3);
+                    enemies.Add(stalfos4);
+                    enemies.Add(stalfos5);
+                    enemies.Add(keese7);
+                    enemies.Add(keese8);
                     break;
             }
 
@@ -134,15 +159,58 @@ namespace LegendOfZeldaFirstDungeon
 
             Movement();
 
-            foreach (Enemy i in enemies)     //Preparing enemies for movement
+            foreach (Enemy i in enemies)     //Preparing enemies for movement and shooting
             {
                 i.counter++;
                 i.Move(i, randGen);
+                shoot = i.Shoot(i);
+
+                if (shoot)
+                {
+                    switch (i.directX)
+                    {
+                        case 1:
+                            Projectile shotLeft = new Projectile(i.x - 32, i.y + 8, 32, 40, i.speed, "rock", "left");
+                            projectiles.Add(shotLeft);
+                            break;
+                        case 2:
+                            Projectile shotDown = new Projectile(i.x + 12, i.y + 49, 32, 40, i.speed, "rock", "down");
+                            projectiles.Add(shotDown);
+                            break;
+                        case 3:
+                            Projectile shotRight = new Projectile(i.x + 49, i.y + 8, 32, 40, i.speed, "rock", "right");
+                            projectiles.Add(shotRight);
+                            break;
+                    }
+                }
+            }
+
+            foreach (Projectile p in projectiles)
+            {
+                p.Move(p);
+            }
+
+            if (projectiles.Count > 0)
+            {
+                if (projectiles[0].x < 107 || projectiles[0].x > 725 || projectiles[0].y > 535)
+                {
+                    projectiles.RemoveAt(0);
+                }
             }
 
             foreach (Enemy i in enemies)        //Enemies hurting player
             {
                 if (player.Collision(i) && playImmune < 1)
+                {
+                    Form1.playerHealth--;
+                    player.health = Form1.playerHealth;
+                    playImmune = 50;
+                    Form1.score -= 50;
+                }
+            }
+            foreach (Projectile p in projectiles)
+            {
+                if (player.CollisionProjectile(p) && playImmune < 1)
                 {
                     Form1.playerHealth--;
                     player.health = Form1.playerHealth;
@@ -182,8 +250,15 @@ namespace LegendOfZeldaFirstDungeon
             {
                 clear = false;
 
-                Form1.room++;
-                OnStart();
+                if (Form1.room < 7)
+                {
+                    Form1.room++;
+                    OnStart();
+                }
+                else
+                {
+
+                }
             }
             else if (player.y < 165 && enemies.Count > 0)   //Or tell player enemies remaining
             {
@@ -207,6 +282,23 @@ namespace LegendOfZeldaFirstDungeon
             {
                 Form1.score--;
                 scoreLoop = 50;
+            }
+
+            if (player.health == 0)
+            {
+                Refresh();
+                Thread.Sleep(3000);
+                Form1.playerHealth = 6;
+                player.health = 6;
+
+                Form f = this.FindForm();
+                f.Controls.Remove(this);
+
+                GameOverScreen gos = new GameOverScreen();
+                gos.Location = new Point((f.Width - gos.Width) / 2, (f.Height - gos.Height) / 2);
+                f.Controls.Add(gos);
+
+                gos.Focus();
             }
 
             Refresh();
@@ -385,8 +477,16 @@ namespace LegendOfZeldaFirstDungeon
                                 e.Graphics.DrawImage(Properties.Resources.Stalfos2, enemies[i].x, enemies[i].y);
                             }
                             break;
+                            case "octorok":
+                                e.Graphics.FillRectangle(redBrush, enemies[i].x, enemies[i].y, enemies[i].width, enemies[i].height);
+                                break;
                     }
                 }
+            }
+
+            foreach (Projectile p in projectiles)
+            {
+                e.Graphics.FillRectangle(redBrush, p.x, p.y, p.width, p.height);
             }
 
             #endregion

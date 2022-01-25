@@ -73,6 +73,13 @@ namespace LegendOfZeldaFirstDungeon
                                 }
                             }
                             break;
+                        case ("octorok"):
+                            if (enemyBox.IntersectsWith(swordUpBox) && i.immune < 1)
+                            {
+                                i.health--;
+                                i.immune = 50;
+                            }
+                            break;
                     }
                     break;
                 case "down":
@@ -97,6 +104,13 @@ namespace LegendOfZeldaFirstDungeon
                                 {
                                     i.y = 534;
                                 }
+                            }
+                            break;
+                        case ("octorok"):
+                            if (enemyBox.IntersectsWith(swordDownBox) && i.immune < 1)
+                            {
+                                i.health--;
+                                i.immune = 50;
                             }
                             break;
                     }
@@ -125,6 +139,13 @@ namespace LegendOfZeldaFirstDungeon
                                 }
                             }
                             break;
+                        case ("octorok"):
+                            if (enemyBox.IntersectsWith(swordLeftBox) && i.immune < 1)
+                            {
+                                i.health--;
+                                i.immune = 50;
+                            }
+                            break;
                     }
                     break;
                 case "right":
@@ -151,12 +172,32 @@ namespace LegendOfZeldaFirstDungeon
                                 }
                             }
                             break;
+                        case ("octorok"):
+                            if (enemyBox.IntersectsWith(swordRightBox) && i.immune < 1)
+                            {
+                                i.health--;
+                                i.immune = 50;
+                            }
+                            break;
                     }
                     break;
             }
         }
 
         public bool Collision(Enemy i)
+        {
+            Rectangle playerBox = new Rectangle(x, y, size, size);
+            Rectangle enemyBox = new Rectangle(i.x, i.y, i.width, i.height);
+
+            if (enemyBox.IntersectsWith(playerBox))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CollisionProjectile(Projectile i)
         {
             Rectangle playerBox = new Rectangle(x, y, size, size);
             Rectangle enemyBox = new Rectangle(i.x, i.y, i.width, i.height);

@@ -20,7 +20,7 @@ namespace LegendOfZeldaFirstDungeon
         public static int playerHealth = 6;
         public static int playerImage = 0;
         public static int score = 0;
-        public static int room = 3;
+        public static int room = 1;
         public static string playerDirect = "up";
         public static bool gameStart = false;
 

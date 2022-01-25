@@ -166,6 +166,9 @@
   <data name="FullHeart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FullHeart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="GameOverScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GameOverScreen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="HalfHeart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\HalfHeart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
