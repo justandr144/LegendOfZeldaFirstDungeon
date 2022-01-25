@@ -65,6 +65,12 @@ namespace LegendOfZeldaFirstDungeon
                             {
                                 i.health--;
                                 i.immune = 50;
+
+                                i.y -= 50;
+                                if (i.y < 180)
+                                {
+                                    i.y = 181;
+                                }
                             }
                             break;
                     }
@@ -85,6 +91,12 @@ namespace LegendOfZeldaFirstDungeon
                             {
                                 i.health--;
                                 i.immune = 50;
+
+                                i.y += 50;
+                                if (i.y > 535)
+                                {
+                                    i.y = 534;
+                                }
                             }
                             break;
                     }
@@ -105,6 +117,12 @@ namespace LegendOfZeldaFirstDungeon
                             {
                                 i.health--;
                                 i.immune = 50;
+                                
+                                i.x -= 50;
+                                if (i.x < 107)
+                                {
+                                    i.x = 108;
+                                }
                             }
                             break;
                     }
@@ -125,6 +143,12 @@ namespace LegendOfZeldaFirstDungeon
                             {
                                 i.health--;
                                 i.immune = 50;
+
+                                i.x += 50;
+                                if (i.x > 710)
+                                {
+                                    i.x = 709;
+                                }
                             }
                             break;
                     }

@@ -49,13 +49,13 @@ namespace LegendOfZeldaFirstDungeon
             switch (Form1.room)
             {
                 case 1:
-                    Enemy keese1 = new Enemy(458, 290, 5, 56, 28, 0, 1, 0, 1, 2, "keese");
+                    Enemy keese1 = new Enemy(458, 290, 6, 56, 28, 0, 1, 0, 1, 2, "keese");
                     enemies.Add(keese1);
                     break;
                 case 2:
-                    Enemy keese2 = new Enemy(458, 290, 5, 56, 28, 40, 1, 0, 1, 2, "keese");
-                    Enemy keese3 = new Enemy(250, 400, 5, 56, 28, 20, 1, 0, 2, 2, "keese");
-                    Enemy keese4 = new Enemy(650, 400, 5, 56, 28, 0, 1, 0, 2, 1, "keese");
+                    Enemy keese2 = new Enemy(458, 290, 6, 56, 28, 40, 1, 0, 1, 2, "keese");
+                    Enemy keese3 = new Enemy(250, 400, 6, 56, 28, 20, 1, 0, 2, 2, "keese");
+                    Enemy keese4 = new Enemy(650, 400, 6, 56, 28, 0, 1, 0, 2, 1, "keese");
                     enemies.Add(keese2);
                     enemies.Add(keese3);
                     enemies.Add(keese4);
@@ -64,7 +64,11 @@ namespace LegendOfZeldaFirstDungeon
                     break;
                 case 3:
                     Enemy Stalfos1 = new Enemy(458, 290, 4, 53, 56, 0, 3, 0, 1, 2, "stalfos");
+                    Enemy keese5 = new Enemy(250, 400, 6, 56, 28, 20, 1, 0, 2, 2, "keese");
+                    Enemy keese6 = new Enemy(650, 400, 6, 56, 28, 0, 1, 0, 2, 1, "keese");
                     enemies.Add(Stalfos1);
+                    enemies.Add(keese5);
+                    enemies.Add(keese6);
                     break;
             }
 
@@ -356,7 +360,8 @@ namespace LegendOfZeldaFirstDungeon
             #region Enemy Movement
             for (int i = 0; i < enemies.Count; i++)
             {
-                if (enemies[i].health > 0)
+                if (enemies[i].immune == 0 || enemies[i].immune > 0 && enemies[i].immune < 5 || enemies[i].immune > 10 && enemies[i].immune < 15 || enemies[i].immune > 20 && enemies[i].immune < 25 || enemies[i].immune > 30 && enemies[i].immune < 35 || enemies[i].immune > 40 && enemies[i].immune < 45)
+                    if (enemies[i].health > 0)
                 {
                     switch (enemies[i].name)
                     {

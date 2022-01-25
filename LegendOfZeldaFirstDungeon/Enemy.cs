@@ -94,6 +94,52 @@ namespace LegendOfZeldaFirstDungeon
                         i.directX = randGen.Next(1, 5);
                         i.counter = 0;
                     }
+
+                    if (i.directX == 1)
+                    {
+                        if (i.x < 710)
+                        {
+                            i.x += i.speed;
+                        }
+                        else
+                        {
+                            i.directX = 2;
+                        }
+                    }
+                    else if (i.directX == 2)
+                    {
+                        if (i.x > 107)
+                        {
+                            i.x -= i.speed;
+                        }
+                        else
+                        {
+                            i.directX = 1;
+                        }
+                    }
+
+                    if (i.directX == 3)
+                    {
+                        if (i.y < 535)
+                        {
+                            i.y += i.speed;
+                        }
+                        else
+                        {
+                            i.directX = 4;
+                        }
+                    }
+                    else if (i.directX == 4)
+                    {
+                        if (i.y > 180)
+                        {
+                            i.y -= i.speed;
+                        }
+                        else
+                        {
+                            i.directX = 3;
+                        }
+                    }
                     break;
             }
         }
