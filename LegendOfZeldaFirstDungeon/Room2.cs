@@ -194,10 +194,7 @@ namespace LegendOfZeldaFirstDungeon
 
         private void Room2_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(Properties.Resources.UpDoor, 397, 197);
-            //e.Graphics.FillRectangle(testBrush, enemies[0].x, enemies[0].y, enemies[0].width, enemies[0].height);
-            //e.Graphics.FillRectangle(testBrush, player.x + 47, player.y + 21, 48, 24);
-
+           
             #region Death Animation
             foreach (Death d in deaths)
             {

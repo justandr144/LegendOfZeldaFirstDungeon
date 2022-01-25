@@ -121,6 +121,12 @@
   <data name="AttackSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AttackSound.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="BeforeBossRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BeforeBossRoom.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BossRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BossRoom.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Death1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Death1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -154,8 +160,8 @@
   <data name="EmptyHeart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EmptyHeart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FloorBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FloorBackground.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FirstRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FirstRoom.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FullHeart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FullHeart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,11 +211,17 @@
   <data name="LinkUp2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkUp2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Stalfos1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Stalfos1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Stalfos2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Stalfos2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="TitleScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TitleScreen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UpDoor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UpDoor.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="UpDownRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UpDownRoom.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ZeldaTheme" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ZeldaTheme.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

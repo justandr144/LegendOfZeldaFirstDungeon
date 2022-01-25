@@ -79,12 +79,6 @@
     <Compile Include="Room2.Designer.cs">
       <DependentUpon>Room2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Room3.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Room3.Designer.cs">
-      <DependentUpon>Room3.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -107,9 +101,6 @@
     <EmbeddedResource Include="Room2.resx">
       <DependentUpon>Room2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Room3.resx">
-      <DependentUpon>Room3.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -125,12 +116,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TitleScreen.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\FloorBackground.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\UpDoor.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\LinkDown1.png" />
@@ -224,6 +209,24 @@
     <None Include="Resources\AttackSound.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FirstRoom.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UpDownRoom.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BeforeBossRoom.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BossRoom.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stalfos1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stalfos2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

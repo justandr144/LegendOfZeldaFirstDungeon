@@ -36,7 +36,7 @@ namespace LegendOfZeldaFirstDungeon
                     {
                         if (i.directX == 1)
                         {
-                            if (i.x < 760)
+                            if (i.x < 710)
                             {
                                 i.x += i.speed;
                             }
@@ -47,7 +47,7 @@ namespace LegendOfZeldaFirstDungeon
                         }
                         else if (i.directX == 2)
                         {
-                            if (i.x > 157)
+                            if (i.x > 107)
                             {
                                 i.x -= i.speed;
                             }
@@ -59,7 +59,7 @@ namespace LegendOfZeldaFirstDungeon
 
                         if (i.directY == 1)
                         {
-                            if (i.y < 540)
+                            if (i.y < 535)
                             {
                                 i.y += i.speed;
                             }
@@ -70,7 +70,7 @@ namespace LegendOfZeldaFirstDungeon
                         }
                         else if (i.directY == 2)
                         {
-                            if (i.y > 260)
+                            if (i.y > 180)
                             {
                                 i.y -= i.speed;
                             }
@@ -86,6 +86,13 @@ namespace LegendOfZeldaFirstDungeon
                             i.directY = randGen.Next(1, 3);
                             i.counter = 0;
                         }
+                    }
+                    break;
+                case "stalfos":
+                    if (i.counter >= 24)
+                    {
+                        i.directX = randGen.Next(1, 5);
+                        i.counter = 0;
                     }
                     break;
             }

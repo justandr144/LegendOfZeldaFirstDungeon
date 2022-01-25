@@ -46,6 +46,7 @@ namespace LegendOfZeldaFirstDungeon
 
         public void Attack(Enemy i)
         {
+            Rectangle enemyBox = new Rectangle(i.x, i.y, i.width, i.height);
             switch (direction)
             {
                 case "up":
@@ -53,8 +54,13 @@ namespace LegendOfZeldaFirstDungeon
                     switch (i.name)
                     {
                         case ("keese"):
-                            Rectangle enemyBox = new Rectangle(i.x, i.y, i.width, i.height);
-
+                            if (enemyBox.IntersectsWith(swordUpBox) && i.immune < 1)
+                            {
+                                i.health--;
+                                i.immune = 50;
+                            }
+                            break;
+                        case ("stalfos"):
                             if (enemyBox.IntersectsWith(swordUpBox) && i.immune < 1)
                             {
                                 i.health--;
@@ -68,8 +74,13 @@ namespace LegendOfZeldaFirstDungeon
                     switch (i.name)
                     {
                         case ("keese"):
-                            Rectangle enemyBox = new Rectangle(i.x, i.y, i.width, i.height);
-
+                            if (enemyBox.IntersectsWith(swordDownBox) && i.immune < 1)
+                            {
+                                i.health--;
+                                i.immune = 50;
+                            }
+                            break;
+                        case ("stalfos"):
                             if (enemyBox.IntersectsWith(swordDownBox) && i.immune < 1)
                             {
                                 i.health--;
@@ -83,8 +94,13 @@ namespace LegendOfZeldaFirstDungeon
                     switch (i.name)
                     {
                         case ("keese"):
-                            Rectangle enemyBox = new Rectangle(i.x, i.y, i.width, i.height);
-
+                            if (enemyBox.IntersectsWith(swordLeftBox) && i.immune < 1)
+                            {
+                                i.health--;
+                                i.immune = 50;
+                            }
+                            break;
+                        case ("stalfos"):
                             if (enemyBox.IntersectsWith(swordLeftBox) && i.immune < 1)
                             {
                                 i.health--;
@@ -98,8 +114,13 @@ namespace LegendOfZeldaFirstDungeon
                     switch (i.name)
                     {
                         case ("keese"):
-                            Rectangle enemyBox = new Rectangle(i.x, i.y, i.width, i.height);
-
+                            if (enemyBox.IntersectsWith(swordRightBox) && i.immune < 1)
+                            {
+                                i.health--;
+                                i.immune = 50;
+                            }
+                            break;
+                        case ("stalfos"):
                             if (enemyBox.IntersectsWith(swordRightBox) && i.immune < 1)
                             {
                                 i.health--;

@@ -43,10 +43,10 @@ namespace LegendOfZeldaFirstDungeon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::LegendOfZeldaFirstDungeon.Properties.Resources.FloorBackground;
+            this.BackgroundImage = global::LegendOfZeldaFirstDungeon.Properties.Resources.FirstRoom;
             this.DoubleBuffered = true;
             this.Name = "Room1";
-            this.Size = new System.Drawing.Size(967, 700);
+            this.Size = new System.Drawing.Size(870, 700);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Room1_Paint);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Room1_KeyUp);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Room1_PreviewKeyDown);

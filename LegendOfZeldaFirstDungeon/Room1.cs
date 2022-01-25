@@ -24,7 +24,6 @@ namespace LegendOfZeldaFirstDungeon
         int spriteLoop = 0;
         int playImmune = 0;
         int attackCool = 0;
-        int deathLoop = 0;
         int scoreLoop = 50;
 
         List<Enemy> enemies = new List<Enemy>();
@@ -47,11 +46,32 @@ namespace LegendOfZeldaFirstDungeon
 
         public void OnStart()       //Setting starting positions and adding enemies
         {
-            Enemy keese1 = new Enemy(458, 290, 5, 56, 28, 0, 1, 0, 1, 2, "keese");
-            enemies.Add(keese1);
+            switch (Form1.room)
+            {
+                case 1:
+                    Enemy keese1 = new Enemy(458, 290, 5, 56, 28, 0, 1, 0, 1, 2, "keese");
+                    enemies.Add(keese1);
+                    break;
+                case 2:
+                    Enemy keese2 = new Enemy(458, 290, 5, 56, 28, 40, 1, 0, 1, 2, "keese");
+                    Enemy keese3 = new Enemy(250, 400, 5, 56, 28, 20, 1, 0, 2, 2, "keese");
+                    Enemy keese4 = new Enemy(650, 400, 5, 56, 28, 0, 1, 0, 2, 1, "keese");
+                    enemies.Add(keese2);
+                    enemies.Add(keese3);
+                    enemies.Add(keese4);
 
-            player.x = 458;
-            player.y = 550;
+                    this.BackgroundImage = Properties.Resources.UpDownRoom;
+                    break;
+                case 3:
+                    Enemy Stalfos1 = new Enemy(458, 290, 4, 53, 56, 0, 3, 0, 1, 2, "stalfos");
+                    enemies.Add(Stalfos1);
+                    break;
+            }
+
+            deaths.Clear();
+
+            player.x = 409;
+            player.y = 530;
 
             attackSound = new System.Windows.Media.MediaPlayer();
             attackSound.Open(new Uri(Application.StartupPath + "/Resources/AttackSound.mp3"));
@@ -110,10 +130,10 @@ namespace LegendOfZeldaFirstDungeon
 
             Movement();
 
-            for (int i = 0; i < enemies.Count; i++)     //Preparing enemies for movement
+            foreach (Enemy i in enemies)     //Preparing enemies for movement
             {
-                enemies[i].counter++;
-                enemies[i].Move(enemies[i], randGen);
+                i.counter++;
+                i.Move(i, randGen);
             }
 
             foreach (Enemy i in enemies)        //Enemies hurting player
@@ -144,13 +164,12 @@ namespace LegendOfZeldaFirstDungeon
                     Death death = new Death(enemies[i].x, enemies[i].y, 36);
                     deaths.Add(death);
 
-                    deathLoop = 36;
                     enemies.RemoveAt(i);
                     Form1.score += 100;
                 }
             }
 
-            if (player.y < 229 && enemies.Count == 0)     //Clearing room
+            if (player.y < 170 && enemies.Count == 0)     //Clearing room
             {
                 clear = true;
             }
@@ -158,26 +177,26 @@ namespace LegendOfZeldaFirstDungeon
             if (clear)      //Load next room if current is cleared
             {
                 clear = false;
-                falseExit = false;
-                gameLoop.Enabled = false;
 
-                Form f = this.FindForm();
-                f.Controls.Remove(this);
-
-                Room2 r2 = new Room2();
-                r2.Location = new Point((f.Width - r2.Width) / 2, (f.Height - r2.Height) / 2);
-                f.Controls.Add(r2);
-
-                r2.Focus();
+                Form1.room++;
+                OnStart();
             }
-            else if (player.y < 229 && enemies.Count > 0)   //Or tell player enemies remaining
+            else if (player.y < 165 && enemies.Count > 0)   //Or tell player enemies remaining
             {
                 falseExit = true;
             }
 
-            if (deathLoop > 0)      //death animation cooldown
+            if (enemies.Count == 0)
             {
-                deathLoop--;
+                falseExit = false;
+            }
+
+            foreach (Death d in deaths)      //death animation cooldown
+            {
+                if (d.timer > 0)
+                {
+                    d.timer--;
+                }
             }
 
             if (scoreLoop <= 0)     //Lower score over time
@@ -191,58 +210,54 @@ namespace LegendOfZeldaFirstDungeon
 
         private void Room1_Paint(object sender, PaintEventArgs e) //death order 1, 2, 8, 3, 8, 3, 4, 5, 6, 9, 7, 1
         {
-            e.Graphics.DrawImage(Properties.Resources.UpDoor, 397, 197);
-            //e.Graphics.FillRectangle(testBrush, enemies[0].x, enemies[0].y, enemies[0].width, enemies[0].height);
-            //e.Graphics.FillRectangle(testBrush, player.x + 47, player.y + 21, 48, 24);
-
             #region Death Animation
             foreach (Death d in deaths)
             {
-                if (deathLoop <= 36 && deathLoop >= 34)
+                if (d.timer <= 36 && d.timer >= 34)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death1, d.x, d.y);
                 }
-                else if (deathLoop <= 33 && deathLoop >= 31)
+                else if (d.timer <= 33 && d.timer >= 31)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death2, d.x, d.y);
                 }
-                else if (deathLoop <= 30 && deathLoop >= 28)
+                else if (d.timer <= 30 && d.timer >= 28)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death8, d.x, d.y);
                 }
-                else if (deathLoop <= 27 && deathLoop >= 25)
+                else if (d.timer <= 27 && d.timer >= 25)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death3, d.x, d.y);
                 }
-                else if (deathLoop <= 24 && deathLoop >= 22)
+                else if (d.timer <= 24 && d.timer >= 22)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death8, d.x, d.y);
                 }
-                else if (deathLoop <= 21 && deathLoop >= 19)
+                else if (d.timer <= 21 && d.timer >= 19)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death3, d.x, d.y);
                 }
-                else if (deathLoop <= 18 && deathLoop >= 16)
+                else if (d.timer <= 18 && d.timer >= 16)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death4, d.x, d.y);
                 }
-                else if (deathLoop <= 15 && deathLoop >= 13)
+                else if (d.timer <= 15 && d.timer >= 13)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death5, d.x, d.y);
                 }
-                else if (deathLoop <= 12 && deathLoop >= 10)
+                else if (d.timer <= 12 && d.timer >= 10)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death6, d.x, d.y);
                 }
-                else if (deathLoop <= 9 && deathLoop >= 7)
+                else if (d.timer <= 9 && d.timer >= 7)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death9, d.x, d.y);
                 }
-                else if (deathLoop <= 6 && deathLoop >= 4)
+                else if (d.timer <= 6 && d.timer >= 4)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death7, d.x, d.y);
                 }
-                else if (deathLoop <= 3 && deathLoop >= 1)
+                else if (d.timer <= 3 && d.timer >= 1)
                 {
                     e.Graphics.DrawImage(Properties.Resources.Death1, d.x, d.y);
                 }
@@ -355,6 +370,16 @@ namespace LegendOfZeldaFirstDungeon
                                 e.Graphics.DrawImage(Properties.Resources.Keese2, enemies[i].x + 12, enemies[i].y);
                             }
                             break;
+                        case "stalfos":
+                            if (enemies[i].counter >= 0 && enemies[i].counter <= 6 || enemies[i].counter >= 13 && enemies[i].counter <= 18)
+                            {
+                                e.Graphics.DrawImage(Properties.Resources.Stalfos1, enemies[i].x, enemies[i].y);
+                            }
+                            else
+                            {
+                                e.Graphics.DrawImage(Properties.Resources.Stalfos2, enemies[i].x, enemies[i].y);
+                            }
+                            break;
                     }
                 }
             }
@@ -365,39 +390,39 @@ namespace LegendOfZeldaFirstDungeon
             switch (player.health)
             {
                 case (0):
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 650, 100);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 100);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 100);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 650, 54);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 54);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
                     break;
                 case (1):
-                    e.Graphics.DrawImage(Properties.Resources.HalfHeart, 650, 100);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 100);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 100);
+                    e.Graphics.DrawImage(Properties.Resources.HalfHeart, 650, 54);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 54);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
                     break;
                 case (2):
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 100);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 100);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 100);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 54);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
                     break;
                 case (3):
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 100);
-                    e.Graphics.DrawImage(Properties.Resources.HalfHeart, 685, 100);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 100);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                    e.Graphics.DrawImage(Properties.Resources.HalfHeart, 685, 54);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
                     break;
                 case (4):
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 100);
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 100);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 100);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
+                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
                     break;
                 case (5):
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 100);
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 100);
-                    e.Graphics.DrawImage(Properties.Resources.HalfHeart, 720, 100);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
+                    e.Graphics.DrawImage(Properties.Resources.HalfHeart, 720, 54);
                     break;
                 case (6):
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 100);
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 100);
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 720, 100);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
+                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 720, 54);
                     break;
             }
             #endregion
@@ -405,9 +430,10 @@ namespace LegendOfZeldaFirstDungeon
             #region Misc Display
             if (falseExit)
             {
-                e.Graphics.DrawString("There are enemies remaining", exitFont, whiteBrush, 50, 100);
+                e.Graphics.DrawString("There are enemies remaining", exitFont, whiteBrush, 30, 60);
             }
-            e.Graphics.DrawString($"{Form1.score}", scoreFont, whiteBrush, 402, 50);
+            e.Graphics.DrawString($"{Form1.score}", scoreFont, whiteBrush, 400, 50);
+            e.Graphics.DrawString($"Room: {Form1.room}", scoreFont, whiteBrush, 100, 20);
             #endregion
         }
 
@@ -441,27 +467,27 @@ namespace LegendOfZeldaFirstDungeon
 
         private void Movement()     //player movement method
         {
-            if (upArrowDown && attack == false && player.y > 260)
+            if (upArrowDown && attack == false && player.y > 180)
             {
                 movement = player.Move("up");
                 player.direction = "up";
             }
-            else if (upArrowDown && attack == false && player.x >= 440 && player.x <= 480 && player.y > 228)
+            else if (upArrowDown && attack == false && player.x >= 390 && player.x <= 430 && player.y > 160)
             {
                 movement = player.Move("up");
                 player.direction = "up";
             }
-            if (downArrowDown && attack == false && player.y < 540)
+            if (downArrowDown && attack == false && player.y < 535)
             {
                 movement = player.Move("down");
                 player.direction = "down";
             }
-            if (leftArrowDown && attack == false && player.x > 157)
+            if (leftArrowDown && attack == false && player.x > 107)
             {
                 movement = player.Move("left");
                 player.direction = "left";
             }
-            if (rightArrowDown && attack == false && player.x < 760)
+            if (rightArrowDown && attack == false && player.x < 710)
             {
                 movement = player.Move("right");
                 player.direction = "right";
