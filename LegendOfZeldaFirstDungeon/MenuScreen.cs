@@ -21,6 +21,7 @@ namespace LegendOfZeldaFirstDungeon
         {
             InitializeComponent();
 
+            gameLoop.Enabled = true;
             music = new System.Windows.Media.MediaPlayer();
             music.Open(new Uri(Application.StartupPath + "/Resources/ZeldaTheme.mp3"));
         }
@@ -31,6 +32,7 @@ namespace LegendOfZeldaFirstDungeon
             {
                 case Keys.B:
                     music.Stop();
+                    gameLoop.Enabled = false;
                     Form1.gameStart = true;
 
                     Form f = this.FindForm();

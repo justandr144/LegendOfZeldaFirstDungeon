@@ -23,6 +23,8 @@ namespace LegendOfZeldaFirstDungeon
         bool falseExit = false;
         bool clear = false;
         bool shoot = false;
+        bool pickUp = false;
+        bool healthUp = false;
         int spriteLoop = 0;
         int playImmune = 0;
         int attackCool = 0;
@@ -36,6 +38,8 @@ namespace LegendOfZeldaFirstDungeon
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         Font exitFont = new Font("Arial", 16);
         Font scoreFont = new Font("Arial", 20);
+
+        Projectile heart = new Projectile(222, 324, 46, 46, 0, "heart", "none");
 
         Random randGen = new Random();
 
@@ -94,6 +98,12 @@ namespace LegendOfZeldaFirstDungeon
                     enemies.Add(stalfos5);
                     enemies.Add(keese7);
                     enemies.Add(keese8);
+                    break;
+                case 6:
+                    projectiles.Add(heart);
+                    break;
+                case 7:
+
                     break;
             }
 
@@ -170,15 +180,15 @@ namespace LegendOfZeldaFirstDungeon
                     switch (i.directX)
                     {
                         case 1:
-                            Projectile shotLeft = new Projectile(i.x - 32, i.y + 8, 32, 40, i.speed, "rock", "left");
+                            Projectile shotLeft = new Projectile(i.x - 28, i.y + 10, 28, 35, i.speed, "rock", "left");
                             projectiles.Add(shotLeft);
                             break;
                         case 2:
-                            Projectile shotDown = new Projectile(i.x + 12, i.y + 49, 32, 40, i.speed, "rock", "down");
+                            Projectile shotDown = new Projectile(i.x + 14, i.y + 49, 28, 35, i.speed, "rock", "down");
                             projectiles.Add(shotDown);
                             break;
                         case 3:
-                            Projectile shotRight = new Projectile(i.x + 49, i.y + 8, 32, 40, i.speed, "rock", "right");
+                            Projectile shotRight = new Projectile(i.x + 49, i.y + 10, 28, 35, i.speed, "rock", "right");
                             projectiles.Add(shotRight);
                             break;
                     }
@@ -210,12 +220,31 @@ namespace LegendOfZeldaFirstDungeon
             }
             foreach (Projectile p in projectiles)
             {
-                if (player.CollisionProjectile(p) && playImmune < 1)
+                if (Form1.room == 6)
                 {
-                    Form1.playerHealth--;
-                    player.health = Form1.playerHealth;
-                    playImmune = 50;
-                    Form1.score -= 50;
+                    if (player.CollisionProjectile(p))
+                    {
+                        pickUp = true;
+
+                        switch (p.type)
+                        {
+                            case "heart":
+                                healthUp = true;
+                                Form1.playerHealth = 8;
+                                player.health = Form1.playerHealth;
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    if (player.CollisionProjectile(p) && playImmune < 1)
+                    {
+                        Form1.playerHealth--;
+                        player.health = Form1.playerHealth;
+                        playImmune = 50;
+                        Form1.score -= 50;
+                    }
                 }
             }
 
@@ -290,6 +319,7 @@ namespace LegendOfZeldaFirstDungeon
                 Thread.Sleep(3000);
                 Form1.playerHealth = 6;
                 player.health = 6;
+                Form1.gameStart = false;
 
                 Form f = this.FindForm();
                 f.Controls.Remove(this);
@@ -454,81 +484,190 @@ namespace LegendOfZeldaFirstDungeon
             {
                 if (enemies[i].immune == 0 || enemies[i].immune > 0 && enemies[i].immune < 5 || enemies[i].immune > 10 && enemies[i].immune < 15 || enemies[i].immune > 20 && enemies[i].immune < 25 || enemies[i].immune > 30 && enemies[i].immune < 35 || enemies[i].immune > 40 && enemies[i].immune < 45)
                     if (enemies[i].health > 0)
-                {
-                    switch (enemies[i].name)
                     {
-                        case "keese":
-                            if (enemies[i].counter >= 0 && enemies[i].counter <= 4 || enemies[i].counter >= 10 && enemies[i].counter <= 14 || enemies[i].counter >= 20 && enemies[i].counter <= 24 || enemies[i].counter >= 30 && enemies[i].counter <= 34 || enemies[i].counter >= 40 && enemies[i].counter <= 44)
-                            {
-                                e.Graphics.DrawImage(Properties.Resources.Keese1, enemies[i].x, enemies[i].y);
-                            }
-                            else
-                            {
-                                e.Graphics.DrawImage(Properties.Resources.Keese2, enemies[i].x + 12, enemies[i].y);
-                            }
-                            break;
-                        case "stalfos":
-                            if (enemies[i].counter >= 0 && enemies[i].counter <= 6 || enemies[i].counter >= 13 && enemies[i].counter <= 18)
-                            {
-                                e.Graphics.DrawImage(Properties.Resources.Stalfos1, enemies[i].x, enemies[i].y);
-                            }
-                            else
-                            {
-                                e.Graphics.DrawImage(Properties.Resources.Stalfos2, enemies[i].x, enemies[i].y);
-                            }
-                            break;
-                            case "octorok":
-                                e.Graphics.FillRectangle(redBrush, enemies[i].x, enemies[i].y, enemies[i].width, enemies[i].height);
+                        switch (enemies[i].name)
+                        {
+                            case "keese":
+                                if (enemies[i].counter >= 0 && enemies[i].counter <= 4 || enemies[i].counter >= 10 && enemies[i].counter <= 14 || enemies[i].counter >= 20 && enemies[i].counter <= 24 || enemies[i].counter >= 30 && enemies[i].counter <= 34 || enemies[i].counter >= 40 && enemies[i].counter <= 44)
+                                {
+                                    e.Graphics.DrawImage(Properties.Resources.Keese1, enemies[i].x, enemies[i].y);
+                                }
+                                else
+                                {
+                                    e.Graphics.DrawImage(Properties.Resources.Keese2, enemies[i].x + 12, enemies[i].y);
+                                }
                                 break;
+                            case "stalfos":
+                                if (enemies[i].counter >= 0 && enemies[i].counter <= 6 || enemies[i].counter >= 13 && enemies[i].counter <= 18)
+                                {
+                                    e.Graphics.DrawImage(Properties.Resources.Stalfos1, enemies[i].x, enemies[i].y);
+                                }
+                                else
+                                {
+                                    e.Graphics.DrawImage(Properties.Resources.Stalfos2, enemies[i].x, enemies[i].y);
+                                }
+                                break;
+                            case "octorok":
+                                switch (enemies[i].directX)
+                                {
+                                    case 1:
+                                        if (enemies[i].counter >= 0 && enemies[i].counter <= 7 || enemies[i].counter >= 15 && enemies[i].counter <= 21 || enemies[i].counter >= 29 && enemies[i].counter <= 35 || enemies[i].counter >= 43 && enemies[i].counter <= 49 || enemies[i].counter >= 57 && enemies[i].counter <= 63)
+                                        {
+                                            e.Graphics.DrawImage(Properties.Resources.OctoLeft1, enemies[i].x, enemies[i].y);
+                                        }
+                                        else
+                                        {
+                                            e.Graphics.DrawImage(Properties.Resources.OctoLeft2, enemies[i].x, enemies[i].y);
+                                        }
+                                        break;
+                                    case 2:
+                                        if (enemies[i].counter >= 0 && enemies[i].counter <= 7 || enemies[i].counter >= 15 && enemies[i].counter <= 21 || enemies[i].counter >= 29 && enemies[i].counter <= 35 || enemies[i].counter >= 43 && enemies[i].counter <= 49 || enemies[i].counter >= 57 && enemies[i].counter <= 63)
+                                        {
+                                            e.Graphics.DrawImage(Properties.Resources.OctoDown1, enemies[i].x, enemies[i].y);
+                                        }
+                                        else
+                                        {
+                                            e.Graphics.DrawImage(Properties.Resources.OctoDown2, enemies[i].x, enemies[i].y);
+                                        }
+                                        break;
+                                    case 3:
+                                        if (enemies[i].counter >= 0 && enemies[i].counter <= 7 || enemies[i].counter >= 15 && enemies[i].counter <= 21 || enemies[i].counter >= 29 && enemies[i].counter <= 35 || enemies[i].counter >= 43 && enemies[i].counter <= 49 || enemies[i].counter >= 57 && enemies[i].counter <= 63)
+                                        {
+                                            e.Graphics.DrawImage(Properties.Resources.OctoRight1, enemies[i].x, enemies[i].y);
+                                        }
+                                        else
+                                        {
+                                            e.Graphics.DrawImage(Properties.Resources.OctoRight2, enemies[i].x, enemies[i].y);
+                                        }
+                                        break;
+                                }
+                                break;
+                        }
                     }
-                }
             }
 
             foreach (Projectile p in projectiles)
             {
-                e.Graphics.FillRectangle(redBrush, p.x, p.y, p.width, p.height);
+                switch (p.type)
+                {
+                    case "rock":
+                        e.Graphics.DrawImage(Properties.Resources.Rock, p.x, p.y, p.width, p.height);
+                        break;
+                    case "fire":
+
+                        break;
+                    case "heart":
+                        if (pickUp == false)
+                        {
+                            e.Graphics.DrawImage(Properties.Resources.HeartContainer, heart.x, heart.y, heart.width, heart.height);
+                        }
+                        break;
+                }
             }
 
             #endregion
 
             #region Health Display
-            switch (player.health)
+            if (healthUp)
             {
-                case (0):
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 650, 54);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 54);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
-                    break;
-                case (1):
-                    e.Graphics.DrawImage(Properties.Resources.HalfHeart, 650, 54);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 54);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
-                    break;
-                case (2):
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 54);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
-                    break;
-                case (3):
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
-                    e.Graphics.DrawImage(Properties.Resources.HalfHeart, 685, 54);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
-                    break;
-                case (4):
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
-                    e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
-                    break;
-                case (5):
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
-                    e.Graphics.DrawImage(Properties.Resources.HalfHeart, 720, 54);
-                    break;
-                case (6):
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
-                    e.Graphics.DrawImage(Properties.Resources.FullHeart, 720, 54);
-                    break;
+                switch (player.health)
+                {
+                    case (0):
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 755, 54);
+                        break;
+                    case (1):
+                        e.Graphics.DrawImage(Properties.Resources.HalfHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 755, 54);
+                        break;
+                    case (2):
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 755, 54);
+                        break;
+                    case (3):
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.HalfHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 755, 54);
+                        break;
+                    case (4):
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 755, 54);
+                        break;
+                    case (5):
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.HalfHeart, 720, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 755, 54);
+                        break;
+                    case (6):
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 720, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 755, 54);
+                        break;
+                    case (7):
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 720, 54);
+                        e.Graphics.DrawImage(Properties.Resources.HalfHeart, 755, 54);
+                        break;
+                    case (8):
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 720, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 755, 54);
+                        break;
+                }
+            }
+            else
+            {
+                switch (player.health)
+                {
+                    case (0):
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
+                        break;
+                    case (1):
+                        e.Graphics.DrawImage(Properties.Resources.HalfHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
+                        break;
+                    case (2):
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
+                        break;
+                    case (3):
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.HalfHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
+                        break;
+                    case (4):
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.EmptyHeart, 720, 54);
+                        break;
+                    case (5):
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.HalfHeart, 720, 54);
+                        break;
+                    case (6):
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 650, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 685, 54);
+                        e.Graphics.DrawImage(Properties.Resources.FullHeart, 720, 54);
+                        break;
+                }
             }
             #endregion
 

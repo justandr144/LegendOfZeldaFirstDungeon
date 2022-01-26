@@ -237,6 +237,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\GameOverScreen.jpg" />
+    <None Include="Resources\OctoDown1.png" />
+    <None Include="Resources\OctoDown2.png" />
+    <None Include="Resources\OctoLeft1.png" />
+    <None Include="Resources\OctoRight1.png" />
+    <None Include="Resources\OctoLeft2.png" />
+    <None Include="Resources\OctoRight2.png" />
+    <None Include="Resources\Rock.png" />
+    <None Include="Resources\HeartContainer.png" />
     <Content Include="scores.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

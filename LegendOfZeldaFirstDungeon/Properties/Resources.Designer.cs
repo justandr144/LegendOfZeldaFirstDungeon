@@ -243,6 +243,16 @@ namespace LegendOfZeldaFirstDungeon.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap HeartContainer {
+            get {
+                object obj = ResourceManager.GetObject("HeartContainer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Keese1 {
             get {
                 object obj = ResourceManager.GetObject("Keese1", resourceCulture);
@@ -376,6 +386,76 @@ namespace LegendOfZeldaFirstDungeon.Properties {
         internal static System.Drawing.Bitmap LinkUp2 {
             get {
                 object obj = ResourceManager.GetObject("LinkUp2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OctoDown1 {
+            get {
+                object obj = ResourceManager.GetObject("OctoDown1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OctoDown2 {
+            get {
+                object obj = ResourceManager.GetObject("OctoDown2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OctoLeft1 {
+            get {
+                object obj = ResourceManager.GetObject("OctoLeft1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OctoLeft2 {
+            get {
+                object obj = ResourceManager.GetObject("OctoLeft2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OctoRight1 {
+            get {
+                object obj = ResourceManager.GetObject("OctoRight1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OctoRight2 {
+            get {
+                object obj = ResourceManager.GetObject("OctoRight2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Rock {
+            get {
+                object obj = ResourceManager.GetObject("Rock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
