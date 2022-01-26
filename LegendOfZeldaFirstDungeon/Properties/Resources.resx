@@ -238,6 +238,9 @@
   <data name="Rock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Rock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Sorry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sorry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Stalfos1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Stalfos1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -249,6 +252,9 @@
   </data>
   <data name="UpDownRoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UpDownRoom.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VictoryScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VictoryScreen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ZeldaTheme" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ZeldaTheme.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

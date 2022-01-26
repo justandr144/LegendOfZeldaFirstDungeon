@@ -108,6 +108,9 @@
     <EmbeddedResource Include="Room1.resx">
       <DependentUpon>Room1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VictoryScreen.resx">
+      <DependentUpon>VictoryScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -245,8 +248,10 @@
     <None Include="Resources\OctoRight2.png" />
     <None Include="Resources\Rock.png" />
     <None Include="Resources\HeartContainer.png" />
+    <None Include="Resources\VictoryScreen.jpg" />
+    <None Include="Resources\Sorry.png" />
     <Content Include="scores.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

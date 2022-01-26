@@ -463,6 +463,16 @@ namespace LegendOfZeldaFirstDungeon.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Sorry {
+            get {
+                object obj = ResourceManager.GetObject("Sorry", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Stalfos1 {
             get {
                 object obj = ResourceManager.GetObject("Stalfos1", resourceCulture);
@@ -496,6 +506,16 @@ namespace LegendOfZeldaFirstDungeon.Properties {
         internal static System.Drawing.Bitmap UpDownRoom {
             get {
                 object obj = ResourceManager.GetObject("UpDownRoom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap VictoryScreen {
+            get {
+                object obj = ResourceManager.GetObject("VictoryScreen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Xml;
 
 namespace LegendOfZeldaFirstDungeon
 {
@@ -101,6 +102,8 @@ namespace LegendOfZeldaFirstDungeon
                     break;
                 case 6:
                     projectiles.Add(heart);
+
+                    this.BackgroundImage = Properties.Resources.BeforeBossRoom;
                     break;
                 case 7:
 
@@ -286,7 +289,17 @@ namespace LegendOfZeldaFirstDungeon
                 }
                 else
                 {
+                    gameLoop.Enabled = false;
+                    string points = Convert.ToString(Form1.score);
 
+                    XmlWriter writer = XmlWriter.Create("scores.xml");
+
+                    writer.WriteStartElement("Scores");
+
+                    writer.WriteElementString("score", points);
+
+                    writer.WriteEndElement();
+                    writer.Close();
                 }
             }
             else if (player.y < 165 && enemies.Count > 0)   //Or tell player enemies remaining
@@ -320,6 +333,7 @@ namespace LegendOfZeldaFirstDungeon
                 Form1.playerHealth = 6;
                 player.health = 6;
                 Form1.gameStart = false;
+                gameLoop.Enabled = false;
 
                 Form f = this.FindForm();
                 f.Controls.Remove(this);
@@ -678,6 +692,11 @@ namespace LegendOfZeldaFirstDungeon
             }
             e.Graphics.DrawString($"{Form1.score}", scoreFont, whiteBrush, 400, 50);
             e.Graphics.DrawString($"Room: {Form1.room}", scoreFont, whiteBrush, 100, 20);
+
+            if (Form1.room == 6)
+            {
+                e.Graphics.DrawImage(Properties.Resources.Sorry, 130, 240);
+            }
             #endregion
         }
 
